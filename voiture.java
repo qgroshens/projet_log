@@ -5,9 +5,9 @@ public class voiture {
 	private int position;
 	private voiture devant;
 	private int num;
-	private boolean[] route;
+	private int[] route;
 
-	voiture(int position, voiture voit, int numero, boolean[] route) {
+	voiture(int position, voiture voit, int numero,int[] route) {
 		vitesse=0;
 		num=numero;
 		this.route=route;
@@ -35,9 +35,9 @@ public class voiture {
 		return position;
 	}
 	void set_position(int pos){
-		route[position]=false;
+		route[position]=0;
 		position=pos;
-		route[position]=true;
+		route[position]=num;
 		//System.out.println("voiture n°"+num+" position "+pos);
 	}
 	int get_num(){

@@ -3,22 +3,22 @@ package projet_log;
 public class route {
 
 
-	final int vmax=3;
-	final int longueur=10;
-	final int nb_voiture=4;
-	model model;
-	int nb_itteration=20;
-	final voiture[] liste_voit=new voiture[nb_voiture];
-	int i=0;
-	int position=longueur;
-	final double p=0.2;
-	int num=0;
-	boolean[] route;
+	private final int vmax=3;
+	private final int longueur=10;
+	private final int nb_voiture=4;
+	private model model;
+	private int nb_itteration=20;
+	private final voiture[] liste_voit=new voiture[nb_voiture];
+	private int i=0;
+	private int position=longueur;
+	private final double p=0.2;
+	private int num=0;
+	private int[] route;
 
 
 	public	void creation(){
 		voiture voiture_devant=null;
-		route=new boolean[longueur];
+		route=new int[longueur];
 		do{
 			num=num+1;
 			position=position-2;
@@ -53,13 +53,13 @@ public class route {
 
 
 
-private	void affichage(int longueur, boolean[] route){
+private	void affichage(int longueur, int[] route){
 		System.out.print("//");
 		for(int k=0;k<longueur;k++){
-			if(route[k]){
-				System.out.print("*");
-			}else{
+			if(route[k]==0){
 				System.out.print("-");
+			}else{
+				System.out.print(route[k]);
 			}
 
 		}
