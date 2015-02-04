@@ -81,10 +81,11 @@ public class route {
 		}
 
 		position=range(position);
-		for(int n=0;n<position.length;n++){
+		/*for(int n=0;n<position.length;n++){
 		System.out.print(position[n]+";");
 		}
 		System.out.println("");
+		*/
 	}
 
 
@@ -93,12 +94,12 @@ public class route {
 
 
 	private	void affichage(int longueur, int[] route){
-		System.out.print("//");
+		System.out.print("//:");
 		for(int k=0;k<longueur;k++){
 			if(route[k]==0){
-				System.out.print("-");
+				System.out.print("-:");
 			}else{
-				System.out.print(route[k]);
+				System.out.print(""+route[k]+":");
 			}
 
 		}
