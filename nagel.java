@@ -25,9 +25,6 @@ public class nagel extends model {
 		}else{
 			gap=devant-position-1;
 		}
-		
-		
-		System.out.println("gap : "+gap);
 		if(v<gap){
 			v=Math.min(v+1,vmax);
 			
