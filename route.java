@@ -1,11 +1,9 @@
 package projet_log;
 
 import java.util.Arrays;
-
 public class route {
 
 
-	private int vmax;
 	private int longueur;
 	private int nb_voiture;
 	private model model;
@@ -13,7 +11,6 @@ public class route {
 	private voiture[] liste_voit;
 	private int i=0;
 	private int[] position;
-	private double p;
 	private int num=0;
 	private int[] route;
 	private voiture voiture_devant;
@@ -21,7 +18,6 @@ public class route {
 	int pos_local;
 
 	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p){
-		this.vmax=vmax;
 		this.longueur=longueur;
 		this.nb_voiture=nb_voiture;
 		this.nb_itteration=nb_itt;
@@ -35,14 +31,14 @@ public class route {
 		gen_position(nb_voiture,longueur);
 		do{
 			num=num+1;
-			liste_voit[i]=new voiture((longueur-position[i])%longueur, voiture_devant,num,route);
+			liste_voit[i]=new voiture(position[i], voiture_devant,num,route);
 			voiture_devant=liste_voit[i];
 			i++;
 		}while(i<nb_voiture);
 		liste_voit[0].set_devant(liste_voit[nb_voiture-1]);
 		i=0;
 		affichage(longueur,route);
-		System.out.println("fin création");
+		System.out.println("fin crÃ©ation");
 	}
 	public void simulation(){
 
@@ -65,16 +61,21 @@ public class route {
 
 			do{
 				ecart=(int)(Math.floor(Math.random()*5));
-				pos_local=position[n]-ecart;
+				pos_local=(position[n]-ecart)%longueur;
 				if(pos_local<0){
 					pos_local=longueur+pos_local;
 				}
 
 			}while(route[pos_local]!=0);
-			position[n+1]=(pos_local)%longueur;
-			n++;
+			position[n+1]=pos_local;
+			
 		}
-		Arrays.sort(position);
+
+		position=range(position);
+		for(int n=0;n<position.length;n++){
+		System.out.print(position[n]);
+		}
+		System.out.println("");
 	}
 
 
@@ -93,6 +94,16 @@ public class route {
 
 		}
 		System.out.println("//");
+	}
+	private int[] range(int[] tableau){
+		for(int i=0;i<tableau.length;i++){
+			tableau[i]=-tableau[i];
+		}
+		Arrays.sort(tableau);
+		for(int i=0;i<tableau.length;i++){
+			tableau[i]=-tableau[i];
+		}
+		return tableau;
 	}
 
 }
