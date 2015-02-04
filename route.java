@@ -3,22 +3,32 @@ package projet_log;
 public class route {
 
 
-	private final int vmax=3;
-	private final int longueur=10;
-	private final int nb_voiture=4;
+	private int vmax;
+	private int longueur;
+	private int nb_voiture;
 	private model model;
-	private int nb_itteration=20;
-	private final voiture[] liste_voit=new voiture[nb_voiture];
+	private int nb_itteration;
+	private voiture[] liste_voit;
 	private int i=0;
-	private int position=longueur;
-	private final double p=0.2;
+	private int position;
+	private double p;
 	private int num=0;
 	private int[] route;
+	private voiture voiture_devant;
 
+	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p){
+		this.vmax=vmax;
+		this.longueur=longueur;
+		this.nb_voiture=nb_voiture;
+		this.nb_itteration=nb_itt;
+		liste_voit=new voiture[nb_voiture];
+		position=longueur;
+		route=new int[longueur];
+		voiture_devant=null;
+		model= new nagel(vmax,longueur,p);
+	}
 
 	public	void creation(){
-		voiture voiture_devant=null;
-		route=new int[longueur];
 		do{
 			num=num+1;
 			position=position-2;
@@ -27,10 +37,9 @@ public class route {
 			i++;
 		}while(i<nb_voiture);
 		liste_voit[0].set_devant(liste_voit[nb_voiture-1]);
-		model= new nagel(vmax,longueur,p);
 		i=0;
 		affichage(longueur,route);
-		System.out.println("fin crÃ©ation");
+		System.out.println("fin création");
 	}
 	public void simulation(){
 
