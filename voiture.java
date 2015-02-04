@@ -1,4 +1,4 @@
-package log_essai1;
+package projet_log;
 
 public class voiture {
 	private int vitesse;
