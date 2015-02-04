@@ -15,9 +15,11 @@ public class route {
 	private int[] route;
 	private voiture voiture_devant;
 	private int ecart;
-	int pos_local;
+	private int pos_local;
+	private int vmax;
 
 	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p){
+		this.vmax=vmax;
 		this.longueur=longueur;
 		this.nb_voiture=nb_voiture;
 		this.nb_itteration=nb_itt;
@@ -25,13 +27,14 @@ public class route {
 		route=new int[longueur];
 		voiture_devant=null;
 		model= new nagel(vmax,longueur,p);
+		position=new int[nb_voiture];
 	}
 
 	public	void creation(){
 		gen_position(nb_voiture,longueur);
 		do{
 			num=num+1;
-			liste_voit[i]=new voiture(position[i], voiture_devant,num,route);
+			liste_voit[i]=new voiture(position[i], voiture_devant,num,route,vmax);
 			voiture_devant=liste_voit[i];
 			i++;
 		}while(i<nb_voiture);
@@ -55,8 +58,13 @@ public class route {
 	}
 
 	private void gen_position(int nb_voiture, int longueur){
-		position=new int[nb_voiture];
+		boolean[] occupation=new boolean[longueur];
 		position[0]=(int)(Math.floor(Math.random()*(longueur)));//position premiere voiture
+		
+		for(int i=0;i<longueur;i++){
+			occupation[i]=false;
+		}
+		occupation[position[0]]=true;
 		for(int n=0;n<nb_voiture-1;n++){
 
 			do{
@@ -66,14 +74,15 @@ public class route {
 					pos_local=longueur+pos_local;
 				}
 
-			}while(route[pos_local]!=0);
+			}while(occupation[pos_local]);
 			position[n+1]=pos_local;
+			occupation[pos_local]=true;
 			
 		}
 
 		position=range(position);
 		for(int n=0;n<position.length;n++){
-		System.out.print(position[n]);
+		System.out.print(position[n]+";");
 		}
 		System.out.println("");
 	}

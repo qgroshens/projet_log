@@ -7,8 +7,8 @@ public class voiture {
 	private int num;
 	private int[] route;
 
-	voiture(int position, voiture voit, int numero,int[] route) {
-		vitesse=0;
+	voiture(int position, voiture voit, int numero,int[] route,int vmax) {
+		vitesse=(int)(Math.floor(Math.random()*(vmax)));//vitesse aleatoire au dÃ©part
 		num=numero;
 		this.route=route;
 		set_position(position);
@@ -17,7 +17,7 @@ public class voiture {
 
 	void set_vitesse(int vit){
 		vitesse=vit;
-		//System.out.println("voiture n°"+num+" vitesse "+vit);
+		//System.out.println("voiture nï¿½"+num+" vitesse "+vit);
 	}
 	int get_vitesse(){
 		return vitesse;
