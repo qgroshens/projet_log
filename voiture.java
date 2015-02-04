@@ -17,7 +17,7 @@ public class voiture {
 
 	void set_vitesse(int vit){
 		vitesse=vit;
-		//System.out.println("voiture nÂ°"+num+" vitesse "+vit);
+		//System.out.println("voiture n°"+num+" vitesse "+vit);
 	}
 	int get_vitesse(){
 		return vitesse;
