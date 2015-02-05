@@ -17,6 +17,7 @@ public class route {
 	private int ecart;
 	private int pos_local;
 	private int vmax;
+	private double debit=0;
 
 	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p){
 		this.vmax=vmax;
@@ -43,18 +44,25 @@ public class route {
 		affichage(longueur,route);
 		System.out.println("fin création");
 	}
-	public void simulation(){
+	public double simulation(){
+		boolean sortie;
+		int temps=nb_itteration;
 
 		do{
-			System.out.println("tour restant "+nb_itteration);
+			//System.out.println("tour restant "+temps);
 			for(i=0;i<nb_voiture;i++){
 				model.maj_vitesse(liste_voit[i]);
-				model.maj_position(liste_voit[i]);
+				sortie=model.maj_position(liste_voit[i]);
+				if(sortie){
+					debit=debit+1;
+				}
 			}
-			affichage(longueur,route);
-			nb_itteration--;	
-		}while(nb_itteration>0);
+			//affichage(longueur,route);
+			temps--;	
+		}while(temps>0);
 		System.out.println("fin simulation");
+		return debit/nb_itteration;
+		
 	}
 
 	private void gen_position(int nb_voiture, int longueur){
@@ -68,7 +76,7 @@ public class route {
 		for(int n=0;n<nb_voiture-1;n++){
 
 			do{
-				ecart=(int)(Math.floor(Math.random()*5));
+				ecart=(int)(Math.floor(Math.random()*longueur));
 				pos_local=(position[n]-ecart)%longueur;
 				if(pos_local<0){
 					pos_local=longueur+pos_local;

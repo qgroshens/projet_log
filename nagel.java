@@ -37,10 +37,15 @@ public class nagel extends model {
 		voit.set_vitesse(v);
 
 	}
-	void maj_position(voiture voit){
+	boolean maj_position(voiture voit){
 		int pos = voit.get_position();
+		boolean res=false;
+		if(pos+voit.get_vitesse()>=longueur){
+			res=true;
+		}
 		pos=(pos+voit.get_vitesse())%(longueur);
 		voit.set_position(pos);
+		return res;
 	}
 
 }
