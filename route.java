@@ -1,6 +1,9 @@
 package projet_log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 public class route {
 
 
@@ -44,6 +47,15 @@ public class route {
 		affichage(longueur,route);
 		System.out.println("fin création");
 	}
+	
+	public void step() {
+		
+	}
+	
+	public double getDebit() {
+		return 0.0;
+	}
+	
 	public double simulation(){
 		boolean sortie;
 		int temps=nb_itteration;
@@ -57,7 +69,7 @@ public class route {
 					debit=debit+1;
 				}
 			}
-			//affichage(longueur,route);
+			affichage(longueur,route);
 			temps--;	
 		}while(temps>0);
 		System.out.println("fin simulation");
@@ -66,6 +78,25 @@ public class route {
 	}
 
 	private void gen_position(int nb_voiture, int longueur){
+		/*
+		List<Integer> positions = new ArrayList<Integer>();
+		for(int i = 0 ; i < longueur ; ++i)
+			positions.add(i);
+		// randomize the positions
+		Collections.shuffle(positions);
+		
+		// keep only the nb_voiture first
+		List<Integer> positions_to_keep = new ArrayList<Integer>();
+		for(Integer i : positions) {
+			positions_to_keep.add(i);
+			if(positions_to_keep.size() == nb_voiture)
+				 break;
+		}
+		// sort by decreasing order
+		Collections.sort(positions_to_keep);
+		Collections.reverse(positions_to_keep);
+		*/
+		
 		boolean[] occupation=new boolean[longueur];
 		position[0]=(int)(Math.floor(Math.random()*(longueur)));//position premiere voiture
 		
@@ -114,6 +145,9 @@ public class route {
 		System.out.println("//");
 	}
 	private int[] range(int[] tableau){
+		Arrays.sort(tableau);
+		Collections.reverse(Arrays.asList(tableau));//ArrayUtils.reverse(tableau);
+		/*
 		for(int i=0;i<tableau.length;i++){
 			tableau[i]=-tableau[i];
 		}
@@ -121,6 +155,7 @@ public class route {
 		for(int i=0;i<tableau.length;i++){
 			tableau[i]=-tableau[i];
 		}
+		*/
 		return tableau;
 	}
 
