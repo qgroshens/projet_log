@@ -47,15 +47,15 @@ public class route {
 		affichage(longueur,route);
 		System.out.println("fin création");
 	}
-	
+
 	public void step() {
-		
+
 	}
-	
+
 	public double getDebit() {
 		return 0.0;
 	}
-	
+
 	public double simulation(){
 		boolean sortie;
 		int temps=nb_itteration;
@@ -64,17 +64,42 @@ public class route {
 			//System.out.println("tour restant "+temps);
 			for(i=0;i<nb_voiture;i++){
 				model.maj_vitesse(liste_voit[i]);
+				
+			}
+			for(i=0;i<nb_voiture;i++){
 				sortie=model.maj_position(liste_voit[i]);
 				if(sortie){
 					debit=debit+1;
 				}
 			}
-			affichage(longueur,route);
+			//affichage(longueur,route);
 			temps--;	
 		}while(temps>0);
 		System.out.println("fin simulation");
 		return debit/nb_itteration;
-		
+
+	}
+	public double get_densite(int position){
+		//calcul densite sur 5 cases
+		double presence=0;
+		int[] espace=new int[5];
+		espace[2]=position;
+		espace[3]=(position+1)%longueur;
+		espace[4]=(position+2)%longueur;
+		espace[1]=position-1;
+		espace[0]=position-2;
+
+		if(espace[0]<0)
+			{espace[0]=longueur+espace[0];}
+		if(espace[1]<0)
+			{espace[1]=longueur+espace[1];}
+		for(int i=0;i<5;i++){
+			if(route[espace[i]]!=0){
+				++presence;
+			}
+		}
+
+		return presence/5;
 	}
 
 	private void gen_position(int nb_voiture, int longueur){
@@ -84,7 +109,7 @@ public class route {
 			positions.add(i);
 		// randomize the positions
 		Collections.shuffle(positions);
-		
+
 		// keep only the nb_voiture first
 		List<Integer> positions_to_keep = new ArrayList<Integer>();
 		for(Integer i : positions) {
@@ -95,11 +120,11 @@ public class route {
 		// sort by decreasing order
 		Collections.sort(positions_to_keep);
 		Collections.reverse(positions_to_keep);
-		*/
-		
+		 */
+
 		boolean[] occupation=new boolean[longueur];
 		position[0]=(int)(Math.floor(Math.random()*(longueur)));//position premiere voiture
-		
+
 		for(int i=0;i<longueur;i++){
 			occupation[i]=false;
 		}
@@ -116,7 +141,7 @@ public class route {
 			}while(occupation[pos_local]);
 			position[n+1]=pos_local;
 			occupation[pos_local]=true;
-			
+
 		}
 
 		position=range(position);
@@ -124,7 +149,7 @@ public class route {
 		System.out.print(position[n]+";");
 		}
 		System.out.println("");
-		*/
+		 */
 	}
 
 
@@ -143,6 +168,14 @@ public class route {
 
 		}
 		System.out.println("//");
+		System.out.println("densite");
+		System.out.print("//:");
+		for(int n=0;n<longueur;n++){
+			double densite_local=get_densite(n);
+			System.out.print(densite_local+":");
+			
+		}
+		System.out.println("//");
 	}
 	private int[] range(int[] tableau){
 		Arrays.sort(tableau);
@@ -155,7 +188,7 @@ public class route {
 		for(int i=0;i<tableau.length;i++){
 			tableau[i]=-tableau[i];
 		}
-		*/
+		 */
 		return tableau;
 	}
 

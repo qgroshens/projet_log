@@ -44,6 +44,8 @@ public class nagel extends model {
 			res=true;
 		}
 		pos=(pos+voit.get_vitesse())%(longueur);
+		if(pos<0)
+		{pos=longueur+pos;}
 		voit.set_position(pos);
 		return res;
 	}
