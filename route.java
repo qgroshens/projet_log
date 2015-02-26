@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.File;
+
 public class route {
 
 
@@ -21,6 +25,11 @@ public class route {
 	private int pos_local;
 	private int vmax;
 	private double debit=0;
+	private int temps=0;
+	private int tempsPrecedent=0;
+	private String densiteTexte="";
+	private String voitureTexte="";
+	private String Newligne=System.getProperty("line.separator"); 
 
 	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p){
 		this.vmax=vmax;
@@ -38,28 +47,44 @@ public class route {
 		gen_position(nb_voiture,longueur);
 		do{
 			num=num+1;
-			liste_voit[i]=new voiture(position[i], voiture_devant,num,route,vmax);
+			liste_voit[i]=new voiture(position[nb_voiture-i-1], voiture_devant,num,route,vmax);
 			voiture_devant=liste_voit[i];
 			i++;
 		}while(i<nb_voiture);
 		liste_voit[0].set_devant(liste_voit[nb_voiture-1]);
 		i=0;
-		affichage(longueur,route);
-		System.out.println("fin crÃ©ation");
+		//affichage(longueur,route);
+		//System.out.println("fin crÃ©ation");
 	}
 
 	public void step() {
-
+		boolean sortie;
+		temps++;
+		for(i=0;i<nb_voiture;i++){
+			model.maj_vitesse(liste_voit[i]);
+			
+		}
+		for(i=0;i<nb_voiture;i++){
+			sortie=model.maj_position(liste_voit[i]);
+			if(sortie){
+				incrBebit();
+			}
+		}
+		sortieDensiteTexte();
+		sortieVoitureTexte();
 	}
 
 	public double getDebit() {
-		return 0.0;
+		return debit;
+	}
+	private void incrBebit(){
+		debit=(debit*tempsPrecedent+1)/temps;
+		tempsPrecedent=temps;
+		
 	}
 
 	public double simulation(){
 		boolean sortie;
-		int temps=nb_itteration;
-
 		do{
 			//System.out.println("tour restant "+temps);
 			for(i=0;i<nb_voiture;i++){
@@ -72,9 +97,9 @@ public class route {
 					debit=debit+1;
 				}
 			}
-			//affichage(longueur,route);
-			temps--;	
-		}while(temps>0);
+			affichage(longueur,route);
+			temps++;	
+		}while(temps<nb_itteration);
 		System.out.println("fin simulation");
 		return debit/nb_itteration;
 
@@ -176,7 +201,71 @@ public class route {
 			
 		}
 		System.out.println("//");
+		
 	}
+	private void sortieDensiteTexte(){
+		
+		densiteTexte=densiteTexte+Newligne+"[";
+		for(int n=0;n<longueur;n++){
+			double densite_local=get_densite(n);
+			densiteTexte=densiteTexte+densite_local+" ";
+		}
+		densiteTexte=densiteTexte+"]"+Newligne;
+	}
+private void sortieVoitureTexte(){
+		
+		voitureTexte=voitureTexte+Newligne+"[";
+		for(int k=0;k<longueur;k++){
+			if(route[k]==0){
+				voitureTexte=voitureTexte+"0 ";
+			}else{
+				voitureTexte=voitureTexte+route[k]+" ";
+			}
+
+		}
+		voitureTexte=voitureTexte+"]"+Newligne;
+	}
+	
+	public void ecrireDensiteText(){
+		 	final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\densiteVal.m";
+	        final File fichier =new File(chemin); 
+	        try {
+	            // Creation du fichier
+	            fichier .createNewFile();
+	            // creation d'un writer (un écrivain)
+	            final FileWriter writer = new FileWriter(fichier);
+	            try {
+	            	writer.write("densite=["+Newligne);
+	                writer.write(densiteTexte);
+	                writer.write("];");
+	            } finally {
+	                // quoiqu'il arrive, on ferme le fichier
+	                writer.close();
+	            }
+	        } catch (Exception e) {
+	            System.out.println("Impossible de creer le fichier");
+	        }
+	}
+	public void ecrireVoitureText(){
+	 	final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\voitureVal.m";
+        final File fichier =new File(chemin); 
+        try {
+            // Creation du fichier
+            fichier .createNewFile();
+            // creation d'un writer (un écrivain)
+            final FileWriter writer = new FileWriter(fichier);
+            try {
+            	writer.write("voiture=["+Newligne);
+                writer.write(voitureTexte);
+                writer.write("];");
+            } finally {
+                // quoiqu'il arrive, on ferme le fichier
+                writer.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Impossible de creer le fichier");
+        }
+}
 	private int[] range(int[] tableau){
 		Arrays.sort(tableau);
 		Collections.reverse(Arrays.asList(tableau));//ArrayUtils.reverse(tableau);
