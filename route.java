@@ -77,6 +77,9 @@ public class route {
 	public double getDebit() {
 		return debit;
 	}
+	public int[] get_route(){
+		return route;
+	}
 	private void incrBebit(){
 		debit=(debit*tempsPrecedent+1)/temps;
 		tempsPrecedent=temps;
@@ -120,11 +123,29 @@ public class route {
 			{espace[1]=longueur+espace[1];}
 		for(int i=0;i<5;i++){
 			if(route[espace[i]]!=0){
-				++presence;
+				switch(i){
+				case 0:
+					presence=presence+1;
+					break;
+				case 1:
+					presence=presence+2;
+					break;
+				case 2:
+					presence=presence+3;
+					break;
+				case 3:
+					presence=presence+2;
+					break;
+				case 4:
+					presence=presence+1;
+					break;
+				}
+				
+				
 			}
 		}
 
-		return presence/5;
+		return presence/9;
 	}
 
 	private void gen_position(int nb_voiture, int longueur){
