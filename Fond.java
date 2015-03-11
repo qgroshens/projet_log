@@ -1,5 +1,6 @@
 package projet_log;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,7 @@ public class Fond extends JFrame  implements ActionListener{
 		
 		//les labels
 			//label compteur de steps
-		compteur_step.setLayout(null);
+		compteur_step.setLayout(new FlowLayout());
 		Font police = new Font("Tahoma", Font.BOLD, 18); 
 		compteur_step.setLocation(100, 10);
 		compteur_step.setFont(police);
