@@ -56,6 +56,10 @@ public class route {
 		//affichage(longueur,route);
 		//System.out.println("fin création");
 	}
+	
+	public int get_temps(){
+		return temps;
+	}
 
 	public void step() {
 		boolean sortie;
