@@ -56,6 +56,14 @@ public class route {
 		//affichage(longueur,route);
 		//System.out.println("fin création");
 	}
+	
+	public int get_temps(){
+		return temps;
+	}
+	
+	public int get_nb_voit(){
+		return nb_voiture;
+	}
 
 	public void step() {
 		boolean sortie;

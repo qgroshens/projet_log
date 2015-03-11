@@ -1,12 +1,13 @@
 package projet_log;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import java.awt.Graphics;
 
 public class Fond extends JFrame  implements ActionListener{
 	static final long serialVersionUID = 1;	
@@ -18,20 +19,19 @@ public class Fond extends JFrame  implements ActionListener{
 	private boolean compteur = false;
 	private Thread t;
 	private int[] liste;
-
-
-
+	private JLabel compteur_step = new JLabel(); 
+	private JLabel label_num_voit[];
+	
 	public Fond(route route){
 
 		this.setVisible(true);
 		this.fond = new Panneau();
-		this.setTitle("première interface");
-		this.setSize(400, 400);
+		this.setTitle("Interface Graphique");
+		this.setSize(4000, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.route=route;
 		this.liste = route.get_route();
-		
 		
 		//les boutons
 		
@@ -39,8 +39,26 @@ public class Fond extends JFrame  implements ActionListener{
 		b_startstop = new Boutons1("start/stop", this);
 		fond.add(b_startstop);
 		fond.add(b_increment);
-
+		
+		//les labels
+			//label compteur de steps
+		compteur_step.setLayout(null);
+		Font police = new Font("Tahoma", Font.BOLD, 18); 
+		compteur_step.setLocation(100, 10);
+		compteur_step.setFont(police);
+		compteur_step.setForeground(Color.BLACK);
+		fond.add(compteur_step);
 		this.getContentPane().add(fond);
+		
+			//labels des numéros de voitures
+		label_num_voit = new JLabel[route.get_nb_voit()];
+		for(int k=0;k<label_num_voit.length;k++){
+			label_num_voit[k].setText(""+k);
+			fond.add(label_num_voit[k]);
+		}
+		
+		
+		
 
 	}
 
@@ -150,7 +168,12 @@ public class Fond extends JFrame  implements ActionListener{
 				
 				//dessine une voiture dans la case
 				if(liste[k]>0){
+<<<<<<< HEAD
 					g.fillRect(taille_case*(k)+2*marge, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-marge, hauteur_dess_route-2*15);
+=======
+					g.fillRect(taille_case*(k)+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
+					compteur_step.setText("incrément n° " + route.get_temps());
+>>>>>>> origin/master
 				}
 			}
 
