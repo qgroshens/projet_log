@@ -54,6 +54,7 @@ public class Fond extends JFrame  implements ActionListener{
 			//labels des numéros de voitures
 		label_num_voit = new JLabel[route.get_nb_voit()];
 		for(int k=0;k<label_num_voit.length;k++){
+			label_num_voit[k]  = new JLabel();
 			label_num_voit[k].setText(""+k);
 			fond.add(label_num_voit[k]);
 		}
@@ -169,12 +170,9 @@ public class Fond extends JFrame  implements ActionListener{
 				
 				//dessine une voiture dans la case
 				if(liste[k]>0){
-<<<<<<< HEAD
-					g.fillRect(taille_case*(k)+2*marge, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-marge, hauteur_dess_route-2*15);
-=======
+
 					g.fillRect(taille_case*(k)+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 					compteur_step.setText("incrément n° " + route.get_temps());
->>>>>>> origin/master
 				}
 			}
 
