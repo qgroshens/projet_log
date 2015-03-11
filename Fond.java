@@ -33,6 +33,8 @@ public class Fond extends JFrame  implements ActionListener{
 		this.setLocationRelativeTo(null);
 		this.route=route;
 		this.liste = route.get_route();
+		//fond.setLayout(null);
+		//this.setLayout(null);
 		
 		//les boutons
 		
@@ -43,9 +45,10 @@ public class Fond extends JFrame  implements ActionListener{
 		
 		//les labels
 			//label compteur de steps
-		compteur_step.setLayout(new FlowLayout());
+		//compteur_step.setLayout(new FlowLayout());
 		Font police = new Font("Tahoma", Font.BOLD, 18); 
-		compteur_step.setLocation(100, 10);
+		//compteur_step.setLocation(100, 100);
+		compteur_step.setBounds(10, 10, 100, 100);
 		compteur_step.setFont(police);
 		compteur_step.setForeground(Color.BLACK);
 		fond.add(compteur_step);
