@@ -131,18 +131,18 @@ public class Fond extends JFrame  implements ActionListener{
 			super.paintComponents(g);
 
 			int nb_case = liste.length; //nombre de cellule à dessiner sur la route
-			int taille_case = (this.getWidth()-10)/nb_case; // taille des cases à dessiner
+			int taille_case = this.getWidth()/nb_case; // taille des cases à dessiner
 			int marge = 5; //les marges à gauche et à droite de la route
 
 			g.setColor(Color.blue); //fond de la fenêtre d'interface
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 			g.setColor(Color.gray); //dessin de la route (x1,y1,x2,y2)
-			g.fillRect(marge, this.getHeight()/2-hauteur_dess_route/2, this.getWidth()-2*marge, hauteur_dess_route);
+			g.fillRect(marge, this.getHeight()/2-hauteur_dess_route/2, this.getWidth()-marge, hauteur_dess_route);
 
 			g.setColor(Color.black); //dessin des cellules
-			for(int i=1;i<nb_case;i++){
-				g.drawLine(5+taille_case*i, this.getHeight()/2-hauteur_dess_route/2, marge+taille_case*i, this.getHeight()/2+hauteur_dess_route/2);
+			for(int i=1;i<=nb_case+1;i++){
+				g.drawLine(marge+taille_case*i, this.getHeight()/2-hauteur_dess_route/2, taille_case*i+marge, this.getHeight()/2+hauteur_dess_route/2);
 			}
 
 			g.setColor(Color.red);
@@ -150,7 +150,7 @@ public class Fond extends JFrame  implements ActionListener{
 				
 				//dessine une voiture dans la case
 				if(liste[k]>0){
-					g.fillRect(taille_case*(k)+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
+					g.fillRect(taille_case*(k)+2*marge, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-marge, hauteur_dess_route-2*15);
 				}
 			}
 
@@ -168,7 +168,8 @@ public class Fond extends JFrame  implements ActionListener{
 				route.ecrireDensiteText();
 				route.ecrireVoitureText();
 				try {
-					Thread.sleep(300);
+					//Thread.sleep(300);
+					Thread.sleep(50);//mode turbo affichage
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
