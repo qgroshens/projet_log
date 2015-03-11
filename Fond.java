@@ -20,19 +20,18 @@ public class Fond extends JFrame  implements ActionListener{
 	private Thread t;
 	private int[] liste;
 	private JLabel compteur_step = new JLabel(); 
-
-
+	private JLabel label_num_voit[];
+	
 	public Fond(route route){
 
 		this.setVisible(true);
 		this.fond = new Panneau();
-		this.setTitle("première interface");
-		this.setSize(400, 400);
+		this.setTitle("Interface Graphique");
+		this.setSize(4000, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.route=route;
 		this.liste = route.get_route();
-		
 		
 		//les boutons
 		
@@ -42,12 +41,24 @@ public class Fond extends JFrame  implements ActionListener{
 		fond.add(b_increment);
 		
 		//les labels
+			//label compteur de steps
+		compteur_step.setLayout(null);
 		Font police = new Font("Tahoma", Font.BOLD, 18); 
-		compteur_step.setLocation(10, 10);
+		compteur_step.setLocation(100, 10);
 		compteur_step.setFont(police);
 		compteur_step.setForeground(Color.BLACK);
 		fond.add(compteur_step);
 		this.getContentPane().add(fond);
+		
+			//labels des numéros de voitures
+		label_num_voit = new JLabel[route.get_nb_voit()];
+		for(int k=0;k<label_num_voit.length;k++){
+			label_num_voit[k].setText(""+k);
+			fond.add(label_num_voit[k]);
+		}
+		
+		
+		
 
 	}
 

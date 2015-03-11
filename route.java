@@ -60,6 +60,10 @@ public class route {
 	public int get_temps(){
 		return temps;
 	}
+	
+	public int get_nb_voit(){
+		return nb_voiture;
+	}
 
 	public void step() {
 		boolean sortie;
