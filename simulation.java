@@ -3,7 +3,7 @@ package projet_log;
 
 public class simulation {
 	public static void main (String[] args){
-		route route=new route(5,20,3,100,0.5);//int vmax, int longueur,int nb_voiture, int nb_itt, double p
+		route route=new route(10,100,20,100,0.5);//int vmax, int longueur,int nb_voiture, int nb_itt, double p
 		route.creation();
 		Fond fenetre = new Fond(route);
 		/*for(int i=0;i<200;i++){
