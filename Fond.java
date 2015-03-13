@@ -1,6 +1,6 @@
 package projet_log;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -27,6 +27,8 @@ public class Fond extends JFrame  implements ActionListener{
 
 		this.setVisible(true);
 		this.fond = new Panneau();
+		fond.setPreferredSize(new Dimension(640, 480)); //
+		fond.setLayout(null);//
 		this.setTitle("Interface Graphique");
 		this.setSize(4000, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,33 +36,39 @@ public class Fond extends JFrame  implements ActionListener{
 		this.route=route;
 		this.liste = route.get_route();
 		
-		//les boutons
 		
+		//les boutons
 		b_increment = new Boutons1("incrémente", this);
 		b_startstop = new Boutons1("start/stop", this);
+		b_startstop.setBounds(this.getWidth()/2-60, 10,90,50);//
+		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);//
 		fond.add(b_startstop);
 		fond.add(b_increment);
 		
-		//les labels
-			//label compteur de steps
-		compteur_step.setLayout(new FlowLayout());
+	//les labels
+
+		//label compteur de steps
 		Font police = new Font("Tahoma", Font.BOLD, 18); 
-		compteur_step.setLocation(100, 10);
 		compteur_step.setFont(police);
 		compteur_step.setForeground(Color.BLACK);
+		compteur_step.setBounds(10, 5,500,100);//
+		//compteur_step.setBorder(BorderFactory.createLineBorder(Color.blue, 4));
 		fond.add(compteur_step);
-		this.getContentPane().add(fond);
 		
-			//labels des numéros de voitures
+		//labels des numéros de voitures
 		label_num_voit = new JLabel[route.get_nb_voit()];
+		Font police2 = new Font("Tahoma", Font.BOLD, 15); 
+		
 		for(int k=0;k<label_num_voit.length;k++){
 			label_num_voit[k]  = new JLabel();
 			label_num_voit[k].setText(""+k);
+			label_num_voit[k].setFont(police2);
 			fond.add(label_num_voit[k]);
 		}
+		//this.getContentPane().setLayout(null);
 		
 		
-		
+		this.getContentPane().add(fond);
 
 	}
 
@@ -89,7 +97,6 @@ public class Fond extends JFrame  implements ActionListener{
 				this.t = new Thread(fond);
 				fond.set_bool_anim(true);
 				t.start();
-				//fond.animation();
 				compteur = true;
 
 			}
@@ -149,12 +156,18 @@ public class Fond extends JFrame  implements ActionListener{
 		public void paintComponent(Graphics g){
 
 			super.paintComponents(g);
+//<<<<<<< HEAD
+			
+			int nb_case = liste.length; //nombre de cellule à dessiner sur la route
+//=======
 			int largueur=this.getWidth();
 			int hauteur= this.getHeight();
 
-			int nb_case = liste.length; //nombre de cellule à dessiner sur la route
-			int taille_case = largueur/nb_case; // taille des cases à dessiner
+		//	int nb_case = liste.length; //nombre de cellule à dessiner sur la route
+			//int taille_case = largueur/nb_case; // taille des cases à dessiner
+//>>>>>>> origin/master
 			int marge = 5; //les marges à gauche et à droite de la route
+			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases à dessiner
 
 			g.setColor(Color.blue); //fond de la fenêtre d'interface
 			g.fillRect(0, 0, largueur, this.getHeight());
@@ -166,14 +179,21 @@ public class Fond extends JFrame  implements ActionListener{
 			for(int i=0;i<=nb_case;i++){
 				g.drawLine(marge+taille_case*i, hauteur/2-hauteur_dess_route/2, taille_case*i+marge, hauteur/2+hauteur_dess_route/2);
 			}
-
+			
+			//dessine les voitures dans les cases
 			g.setColor(Color.red);
+			int count = 0;
 			for(int k=0; k<liste.length; k++){
-				
-				//dessine une voiture dans la case
+
 				if(liste[k]>0){
-					g.fillRect(taille_case*(k)+1+marge, hauteur/2-hauteur_dess_route/2+15, taille_case-1, hauteur_dess_route-2*15);
+//<<<<<<< HEAD
+					g.fillRect(taille_case*k+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
+//=======
+				//	g.fillRect(taille_case*(k)+1+marge, hauteur/2-hauteur_dess_route/2+15, taille_case-1, hauteur_dess_route-2*15);
+//>>>>>>> origin/master
 					compteur_step.setText("incrément n° " + route.get_temps());
+					label_num_voit[count].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
+					count++;
 				}
 			}
 

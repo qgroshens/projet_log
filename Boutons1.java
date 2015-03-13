@@ -1,6 +1,5 @@
 package projet_log;
-import java.awt.*;
-import javax.swing.*;
+import javax.swing.JButton;
 
 public class Boutons1 extends JButton {
 	static final long serialVersionUID = 1;
