@@ -28,7 +28,7 @@ public class route {
 	private String voitureTexte="";
 	private String Newligne=System.getProperty("line.separator"); 
 
-	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p){
+	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2,double p3){
 		this.vmax=vmax;
 		this.longueur=longueur;
 		this.nb_voiture=nb_voiture;
@@ -36,7 +36,7 @@ public class route {
 		liste_voit=new voiture[nb_voiture];
 		route=new int[longueur];
 		voiture_devant=null;
-		model= new nagel(vmax,longueur,p);
+		model= new nagel(vmax,longueur,p,p2,p3);
 		position=new int[nb_voiture];
 	}
 
@@ -258,7 +258,7 @@ private void sortieVoitureTexte(){
 	        try {
 	            // Creation du fichier
 	            fichier .createNewFile();
-	            // creation d'un writer (un écrivain)
+	            // creation d'un writer (un ï¿½crivain)
 	            final FileWriter writer = new FileWriter(fichier);
 	            try {
 	            	writer.write("densite=["+Newligne);
@@ -278,7 +278,7 @@ private void sortieVoitureTexte(){
         try {
             // Creation du fichier
             fichier .createNewFile();
-            // creation d'un writer (un écrivain)
+            // creation d'un writer (un ï¿½crivain)
             final FileWriter writer = new FileWriter(fichier);
             try {
             	writer.write("voiture=["+Newligne);
