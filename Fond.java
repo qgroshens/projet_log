@@ -160,6 +160,8 @@ public class Fond extends JFrame  implements ActionListener{
 			int largueur=this.getWidth();
 			int hauteur= this.getHeight();
 
+			super.paintComponents(g);
+
 			int marge = 5; //les marges à gauche et à droite de la route
 			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases à dessiner
 
@@ -180,7 +182,10 @@ public class Fond extends JFrame  implements ActionListener{
 			for(int k=0; k<liste.length; k++){
 
 				if(liste[k]>0){
+
 					g.fillRect(taille_case*k+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
+
+
 					compteur_step.setText("incrément n° " + route.get_temps());
 					label_num_voit[count].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 					count++;
