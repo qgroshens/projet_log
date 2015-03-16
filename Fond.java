@@ -1,13 +1,12 @@
 package projet_log;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,6 +17,7 @@ public class Fond extends JFrame  implements ActionListener{
 	private route route;
 	private Boutons1 b_startstop;
 	private Boutons1 b_increment;
+	private Boutons1 b_ok;
 	private Panneau fond;
 	private boolean compteur = false;
 	private Thread t;
@@ -26,14 +26,17 @@ public class Fond extends JFrame  implements ActionListener{
 	private JLabel label_num_voit[];
 	private boolean modeDensite;
 	private Combobox boite_combo;
+	private ChampText champ_text;
 	private JPanel panel_reglage;
 	private int vit_index;
+	private JLabel lab;
+	private JLabel lab2;
 
 	public Fond(route route){
 
 		this.setVisible(true);
 		this.fond = new Panneau();
-		fond.setPreferredSize(new Dimension(640, 480)); //
+		fond.setPreferredSize(new Dimension(640, 480)); 
 		fond.setLayout(null);//
 		this.setTitle("Interface Graphique");
 		this.setSize(4000, 500);
@@ -42,12 +45,11 @@ public class Fond extends JFrame  implements ActionListener{
 		this.route=route;
 		this.liste = route.get_route();
 
-
 		//les boutons
 		b_increment = new Boutons1("incrémente", this);
 		b_startstop = new Boutons1("start/stop", this);
-		b_startstop.setBounds(this.getWidth()/2-60, 10,90,50);//
-		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);//
+		b_startstop.setBounds(this.getWidth()/2-60, 10,90,50);
+		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);
 		fond.add(b_startstop);
 		fond.add(b_increment);
 
@@ -57,8 +59,7 @@ public class Fond extends JFrame  implements ActionListener{
 		Font police = new Font("Tahoma", Font.BOLD, 18); 
 		compteur_step.setFont(police);
 		compteur_step.setForeground(Color.BLACK);
-		compteur_step.setBounds(10, 5,500,100);//
-		//compteur_step.setBorder(BorderFactory.createLineBorder(Color.blue, 4));
+		compteur_step.setBounds(10, 5,500,100);
 		fond.add(compteur_step);
 
 		//labels des numéros de voitures
@@ -71,22 +72,36 @@ public class Fond extends JFrame  implements ActionListener{
 			label_num_voit[k].setFont(police2);
 			fond.add(label_num_voit[k]);
 		}
-		//this.getContentPane().setLayout(null);
 		this.getContentPane().add(fond);
-
 	}
 	
 	public Fond(String nom_box,Fond f_simulation){
-		this.boite_combo = new Combobox(this,f_simulation, nom_box);
+		//les boites de dialogue
+		this.boite_combo = new Combobox(this,f_simulation, "plop");
+		this.champ_text = new ChampText(this,f_simulation, "entez ici le nombre de voiture voulu");
+		//les labels pour que ça fasse beau
+		this.lab = new JLabel();
+		this.lab2 = new JLabel();
+		lab.setText("vitesse de l'animation");
+		lab2.setText("nombre de voiture");
+		//du code utile mais chiant
 		this.setTitle(nom_box);
 		this.setSize(300, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(10 ,40);
-
+		
+		b_ok = new Boutons1("ok", this);
 		this.panel_reglage = new JPanel();
 		panel_reglage.setBackground(Color.white);
-		panel_reglage.setLayout(new BorderLayout());
-		panel_reglage.add(boite_combo, BorderLayout.NORTH);
+		panel_reglage.setLayout(new GridLayout(6,2));
+		panel_reglage.add(lab);
+		panel_reglage.add(boite_combo);
+		panel_reglage.add(lab2);
+		panel_reglage.add(champ_text);
+		
+		
+		//à la fin
+		panel_reglage.add(b_ok);
 		this.setContentPane(panel_reglage);
 
 		this.setVisible(true);
@@ -122,12 +137,16 @@ public class Fond extends JFrame  implements ActionListener{
 				b_increment.setEnabled(true);
 			}
 		}
+		else if(bouton_appuye == "start/stop"){
+			//code qui set toutes les valeurs présentes dans la fenêtre de régalge.
+		}
 
 		else{
 			System.out.println("un autre bouton svp");
 		}
 
 	}
+	
 	public void set_vitesse(int vit_index){
 		this.vit_index=vit_index;
 	}

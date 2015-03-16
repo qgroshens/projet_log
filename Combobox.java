@@ -11,10 +11,12 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 public class Combobox extends JComboBox implements ActionListener{
+	static final long serialVersionUID = 1;
+	
 	private String nom;
 	private Fond fen_reglage;
 	private Fond fen_simulation;
-	private JPanel panel_box;
+	//private JPanel panel_box;
 	private int vit=0;
 
 	public Combobox(Fond f_reglage, Fond f_simulation, String nom ){
