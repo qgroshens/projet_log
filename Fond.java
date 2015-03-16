@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -156,21 +155,23 @@ public class Fond extends JFrame  implements ActionListener{
 		//methode de dessin
 		public void paintComponent(Graphics g){
 
-			super.paintComponents(g);
-			
+			super.paintComponents(g);		
 			int nb_case = liste.length; //nombre de cellule à dessiner sur la route
+			int largueur=this.getWidth();
+			int hauteur= this.getHeight();
+
 			int marge = 5; //les marges à gauche et à droite de la route
-			int taille_case = (this.getWidth()-2*marge)/nb_case; // taille des cases à dessiner
+			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases à dessiner
 
 			g.setColor(Color.blue); //fond de la fenêtre d'interface
-			g.fillRect(0, 0, this.getWidth(), this.getHeight());
+			g.fillRect(0, 0, largueur, this.getHeight());
 
 			g.setColor(Color.gray); //dessin de la route (x1,y1,x2,y2)
-			g.fillRect(marge, this.getHeight()/2-hauteur_dess_route/2, this.getWidth()-marge, hauteur_dess_route);
+			g.fillRect(marge, hauteur/2-hauteur_dess_route/2, largueur-marge, hauteur_dess_route);
 
 			g.setColor(Color.black); //dessin des cellules
-			for(int i=1;i<=nb_case+1;i++){
-				g.drawLine(marge+taille_case*i, this.getHeight()/2-hauteur_dess_route/2, taille_case*i+marge, this.getHeight()/2+hauteur_dess_route/2);
+			for(int i=0;i<=nb_case;i++){
+				g.drawLine(marge+taille_case*i, hauteur/2-hauteur_dess_route/2, taille_case*i+marge, hauteur/2+hauteur_dess_route/2);
 			}
 			
 			//dessine les voitures dans les cases

@@ -1,12 +1,9 @@
 package projet_log;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.File;
 
 public class route {
 
