@@ -27,6 +27,8 @@ public class route {
 	private String densiteTexte="";
 	private String voitureTexte="";
 	private String Newligne=System.getProperty("line.separator"); 
+	private double[][]matrice_densite;
+	private int itteration;
 
 	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2,double p3){
 		this.vmax=vmax;
@@ -202,7 +204,20 @@ public class route {
 		System.out.println("");
 		 */
 	}
-
+	public void init_matrice_densite(int longueur, int nb_itteration){
+		matrice_densite=new double[longueur][nb_itteration];
+		itteration=0;
+		
+	}
+	public void matrice_densite(){
+		for(int i=0;i<longueur;i++){
+			matrice_densite[i][itteration]=get_densite(i);
+	}
+		++itteration; 
+	}
+	public double[][] get_matrice_densite(){
+		return matrice_densite;
+	}
 
 
 
@@ -251,6 +266,7 @@ private void sortieVoitureTexte(){
 		}
 		voitureTexte=voitureTexte+"]"+Newligne;
 	}
+	
 	
 	public void ecrireDensiteText(){
 		 	final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\densiteVal.m";
