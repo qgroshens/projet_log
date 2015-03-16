@@ -1,12 +1,14 @@
 package projet_log;
 
 
+
 public class simulation {
 
 	public static void main (String[] args){
 		route route=new route(5,60,15,100,0.2,0.01,0.0001);//int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2
 		route.creation();
 		Fond fenetre = new Fond(route);
+		Fond fenetre_dail = new Fond("entrez vos donnez ici",fenetre);
 		/*for(int i=0;i<200;i++){
 			route.step();
 		}

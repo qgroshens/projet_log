@@ -1,4 +1,5 @@
 package projet_log;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -6,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,7 +24,11 @@ public class Fond extends JFrame  implements ActionListener{
 	private int[] liste;
 	private JLabel compteur_step = new JLabel(); 
 	private JLabel label_num_voit[];
-	
+	private boolean modeDensite;
+	private Combobox boite_combo;
+	private JPanel panel_reglage;
+	private int vit_index;
+
 	public Fond(route route){
 
 		this.setVisible(true);
@@ -35,8 +41,8 @@ public class Fond extends JFrame  implements ActionListener{
 		this.setLocationRelativeTo(null);
 		this.route=route;
 		this.liste = route.get_route();
-		
-		
+
+
 		//les boutons
 		b_increment = new Boutons1("incrémente", this);
 		b_startstop = new Boutons1("start/stop", this);
@@ -44,8 +50,8 @@ public class Fond extends JFrame  implements ActionListener{
 		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);//
 		fond.add(b_startstop);
 		fond.add(b_increment);
-		
-	//les labels
+
+		//les labels
 
 		//label compteur de steps
 		Font police = new Font("Tahoma", Font.BOLD, 18); 
@@ -54,11 +60,11 @@ public class Fond extends JFrame  implements ActionListener{
 		compteur_step.setBounds(10, 5,500,100);//
 		//compteur_step.setBorder(BorderFactory.createLineBorder(Color.blue, 4));
 		fond.add(compteur_step);
-		
+
 		//labels des numéros de voitures
 		label_num_voit = new JLabel[route.get_nb_voit()];
 		Font police2 = new Font("Tahoma", Font.BOLD, 15); 
-		
+
 		for(int k=0;k<label_num_voit.length;k++){
 			label_num_voit[k]  = new JLabel();
 			label_num_voit[k].setText(""+k);
@@ -66,10 +72,24 @@ public class Fond extends JFrame  implements ActionListener{
 			fond.add(label_num_voit[k]);
 		}
 		//this.getContentPane().setLayout(null);
-		
-		
 		this.getContentPane().add(fond);
 
+	}
+	
+	public Fond(String nom_box,Fond f_simulation){
+		this.boite_combo = new Combobox(this,f_simulation, nom_box);
+		this.setTitle(nom_box);
+		this.setSize(300, 500);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocation(10 ,40);
+
+		this.panel_reglage = new JPanel();
+		panel_reglage.setBackground(Color.white);
+		panel_reglage.setLayout(new BorderLayout());
+		panel_reglage.add(boite_combo, BorderLayout.NORTH);
+		this.setContentPane(panel_reglage);
+
+		this.setVisible(true);
 	}
 
 
@@ -103,7 +123,7 @@ public class Fond extends JFrame  implements ActionListener{
 			else
 			{
 				System.out.println("stop");
-				
+
 				fond.set_bool_anim(false);
 				compteur = false;
 				b_increment.setEnabled(true);
@@ -114,6 +134,9 @@ public class Fond extends JFrame  implements ActionListener{
 			System.out.println("un autre bouton svp");
 		}
 
+	}
+	public void set_vitesse(int vit_index){
+		this.vit_index=vit_index;
 	}
 
 	/*public void actionPerformed(ActionEvent evnmt) {
@@ -145,6 +168,8 @@ public class Fond extends JFrame  implements ActionListener{
 		static final long serialVersionUID = 1;	
 		private boolean b_run;
 		private int hauteur_dess_route;
+		private int vit_anim;
+		
 
 
 		public Panneau(){
@@ -175,7 +200,7 @@ public class Fond extends JFrame  implements ActionListener{
 			for(int i=0;i<=nb_case;i++){
 				g.drawLine(marge+taille_case*i, hauteur/2-hauteur_dess_route/2, taille_case*i+marge, hauteur/2+hauteur_dess_route/2);
 			}
-			
+
 			//dessine les voitures dans les cases
 			g.setColor(Color.red);
 			int count = 0;
@@ -194,24 +219,43 @@ public class Fond extends JFrame  implements ActionListener{
 
 		}
 
-		
+
 
 		//methode abstract venant de implements Runnable
 		public void run(){
 			//System.out.println("on est bien là!");
+			set_vitesse_animation(vit_index);
 			while(b_run){
+				
 				route.step();
 
 				repaint();
-				route.ecrireDensiteText();
-				route.ecrireVoitureText();
+				if(modeDensite){
+					//route.ecrireDensiteText();
+					//route.ecrireVoitureText();
+				}
+
 				try {
 					//Thread.sleep(300);
-					Thread.sleep(50);//mode turbo affichage
+					Thread.sleep(vit_anim);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
+		}
+		public void set_vitesse_animation(int vit){
+			if(vit==1){
+				vit_anim=250;
+			}
+			else if(vit==2){
+				vit_anim=100;
+			}
+			else if(vit==3){
+				vit_anim=50;
+			}else{
+				vit_anim=500;
+			}
+			System.out.println("la vitesse est à " + vit_anim);
 		}
 
 		public void set_bool_anim(boolean b){
