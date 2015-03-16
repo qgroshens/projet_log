@@ -28,10 +28,13 @@ public class Affichage extends JFrame {
 		this.setSize(4000, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		this.setContentPane(trace);
+	}
+	
+	public void setMatrice(double[][]matrice){
 		this.matrice=matrice;
 		longMax=matrice.length;
 		tMax=matrice[0].length;
-		this.setContentPane(trace);
 	}
 
 
@@ -46,7 +49,7 @@ public class Affichage extends JFrame {
 
 
 
-		public Trace(){
+		public void init_dim(){
 			longueur_case=Math.round(this.getWidth()/longMax);
 			hauteur_case=Math.round(this.getHeight()/tMax);
 			this.setForeground(Color.gray);
