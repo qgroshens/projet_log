@@ -38,7 +38,7 @@ public class Fond extends JFrame  implements ActionListener{
 		
 		
 		//les boutons
-		b_increment = new Boutons1("incrémente", this);
+		b_increment = new Boutons1("incrÃ©mente", this);
 		b_startstop = new Boutons1("start/stop", this);
 		b_startstop.setBounds(this.getWidth()/2-60, 10,90,50);//
 		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);//
@@ -55,7 +55,7 @@ public class Fond extends JFrame  implements ActionListener{
 		//compteur_step.setBorder(BorderFactory.createLineBorder(Color.blue, 4));
 		fond.add(compteur_step);
 		
-		//labels des numéros de voitures
+		//labels des numï¿½ros de voitures
 		label_num_voit = new JLabel[route.get_nb_voit()];
 		Font police2 = new Font("Tahoma", Font.BOLD, 15); 
 		
@@ -77,7 +77,7 @@ public class Fond extends JFrame  implements ActionListener{
 	public void actionPerformed(ActionEvent evenement) {
 		String bouton_appuye = evenement.getActionCommand();
 
-		if(bouton_appuye == "incrémente"){
+		if(bouton_appuye == "incrï¿½mente"){
 			route.step();
 			fond.repaint();
 		}
@@ -118,10 +118,10 @@ public class Fond extends JFrame  implements ActionListener{
 
 	/*public void actionPerformed(ActionEvent evnmt) {
 
-		if(evnmt.getSource() == "incrémente"){
+		if(evnmt.getSource() == "incrï¿½mente"){
 			test.inc_numero();
 		}
-		else if(evnmt.getSource() == "décrémente"){
+		else if(evnmt.getSource() == "dï¿½crï¿½mente"){
 			test.dec_numero();
 		}
 		else if (evnmt.getSource() == "affiche"){
@@ -156,16 +156,16 @@ public class Fond extends JFrame  implements ActionListener{
 		public void paintComponent(Graphics g){
 
 			super.paintComponents(g);		
-			int nb_case = liste.length; //nombre de cellule à dessiner sur la route
+			int nb_case = liste.length; //nombre de cellule ï¿½ dessiner sur la route
 			int largueur=this.getWidth();
 			int hauteur= this.getHeight();
 
 			super.paintComponents(g);
 
-			int marge = 5; //les marges à gauche et à droite de la route
-			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases à dessiner
+			int marge = 5; //les marges ï¿½ gauche et ï¿½ droite de la route
+			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases ï¿½ dessiner
 
-			g.setColor(Color.blue); //fond de la fenêtre d'interface
+			g.setColor(Color.blue); //fond de la fenï¿½tre d'interface
 			g.fillRect(0, 0, largueur, this.getHeight());
 
 			g.setColor(Color.gray); //dessin de la route (x1,y1,x2,y2)
@@ -186,7 +186,7 @@ public class Fond extends JFrame  implements ActionListener{
 					g.fillRect(taille_case*k+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 
 
-					compteur_step.setText("incrément n° " + route.get_temps());
+					compteur_step.setText("incrÃ©ment " + route.get_temps());
 					label_num_voit[count].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 					count++;
 				}
@@ -198,7 +198,7 @@ public class Fond extends JFrame  implements ActionListener{
 
 		//methode abstract venant de implements Runnable
 		public void run(){
-			//System.out.println("on est bien là!");
+			//System.out.println("on est bien lï¿½!");
 			while(b_run){
 				route.step();
 
