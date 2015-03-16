@@ -31,6 +31,7 @@ public class Affichage extends JFrame {
 		this.matrice=matrice;
 		longMax=matrice.length;
 		tMax=matrice[0].length;
+		this.setContentPane(trace);
 	}
 
 
@@ -48,11 +49,23 @@ public class Affichage extends JFrame {
 		public Trace(){
 			longueur_case=Math.round(this.getWidth()/longMax);
 			hauteur_case=Math.round(this.getHeight()/tMax);
+			this.setForeground(Color.gray);
 		}
-
+		public void MaJ(){
+			repaint();
+		}
+		
 		public void paintComponent(Graphics g){
 
 			super.paintComponents(g);
+			for(int i=tMax;i>0;i--){//parcour le temps
+				for(int k=0;k<longMax;k++){//parcour l'espace
+					Color densite=new Color((int)(matrice[k][i]*256), 0, 0);
+					g.setColor(densite);
+					g.fillRect(k*longueur_case,i*hauteur_case,longueur_case,hauteur_case);//xdebut,ydebut,largeur,hauteur
+
+				}
+			}
 		}
 	}
 }
