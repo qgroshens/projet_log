@@ -45,6 +45,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.setLocationRelativeTo(null);
 		this.route=route;
 		this.liste = route.get_route();
+		this.affichage=affiche;
 
 		//les boutons
 		b_increment = new Boutons1("incrï¿½mente", this);
@@ -208,7 +209,7 @@ public class Fond extends JFrame  implements ActionListener{
 					g.fillRect(taille_case*k+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 
 
-					compteur_step.setText("incrï¿½ment nï¿½ " + route.get_temps());
+					compteur_step.setText("incrément n° " + route.get_temps());
 					label_num_voit[liste[k]-1].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 					count++;
 				}
