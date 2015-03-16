@@ -26,7 +26,7 @@ public class Fond extends JFrame  implements ActionListener{
 	private JLabel label_num_voit[];
 	private boolean modeDensite;
 	private Combobox boite_combo;
-	private ChampText champ_text;
+	private ChampText champ_voit;
 	private JPanel panel_reglage;
 	private int vit_index;
 	private JLabel lab;
@@ -78,7 +78,7 @@ public class Fond extends JFrame  implements ActionListener{
 	public Fond(String nom_box,Fond f_simulation){
 		//les boites de dialogue
 		this.boite_combo = new Combobox(this,f_simulation, "plop");
-		this.champ_text = new ChampText(this,f_simulation, "entez ici le nombre de voiture voulu");
+		this.champ_voit = new ChampText(this,f_simulation, "entez ici le nombre de voiture voulu");
 		//les labels pour que ça fasse beau
 		this.lab = new JLabel();
 		this.lab2 = new JLabel();
@@ -97,7 +97,7 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(lab);
 		panel_reglage.add(boite_combo);
 		panel_reglage.add(lab2);
-		panel_reglage.add(champ_text);
+		panel_reglage.add(champ_voit);
 		
 		
 		//à la fin
@@ -137,7 +137,8 @@ public class Fond extends JFrame  implements ActionListener{
 				b_increment.setEnabled(true);
 			}
 		}
-		else if(bouton_appuye == "start/stop"){
+		else if(bouton_appuye == "ok"){
+			System.out.println("la valeur entrez dans le champ est : " + champ_voit.getText() );
 			//code qui set toutes les valeurs présentes dans la fenêtre de régalge.
 		}
 
