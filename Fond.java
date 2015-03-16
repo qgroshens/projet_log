@@ -27,10 +27,14 @@ public class Fond extends JFrame  implements ActionListener{
 	private boolean modeDensite;
 	private Combobox boite_combo;
 	private ChampText champ_voit;
+	private ChampText champ_route;
+	private ChampText champ_vmax;
+	private ChampText champ_proba1;
+	private ChampText champ_proba2;
+	private ChampText champ_proba3;
+	
 	private JPanel panel_reglage;
 	private int vit_index;
-	private JLabel lab;
-	private JLabel lab2;
 	private Affichage affichage;
 
 	public Fond(route route,Affichage affiche){
@@ -48,7 +52,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.affichage=affiche;
 
 		//les boutons
-		b_increment = new Boutons1("incrï¿½mente", this);
+		b_increment = new Boutons1("incrément", this);
 		b_startstop = new Boutons1("start/stop", this);
 		b_startstop.setBounds(this.getWidth()/2-60, 10,90,50);
 		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);
@@ -77,32 +81,38 @@ public class Fond extends JFrame  implements ActionListener{
 		this.getContentPane().add(fond);
 	}
 	
+	
 	public Fond(String nom_box,Fond f_simulation){
 		//les boites de dialogue
-		this.boite_combo = new Combobox(this,f_simulation, "plop");
-		this.champ_voit = new ChampText(this,f_simulation, "entez ici le nombre de voiture voulu");
-		//les labels pour que ï¿½a fasse beau
-		this.lab = new JLabel();
-		this.lab2 = new JLabel();
-		lab.setText("vitesse de l'animation");
-		lab2.setText("nombre de voiture");
+		this.boite_combo = new Combobox(this,f_simulation);
+		this.champ_voit = new ChampText(this,f_simulation, "Nombre de voiture");
+		this.champ_route = new ChampText(this,f_simulation, "Taille de la route");
+		this.champ_vmax = new ChampText(this,f_simulation, "Vitesse max (case/unité de temps)");
+		this.champ_proba1 = new ChampText(this,f_simulation, "Probabilité de ralentir pour rien");
+		this.champ_proba2 = new ChampText(this,f_simulation, "Probabilité de ne pas redémarrer");
+		this.champ_proba3 = new ChampText(this,f_simulation, "Probabilité de freiner brutalement");
+
 		//du code utile mais chiant
 		this.setTitle(nom_box);
-		this.setSize(300, 500);
+		this.setSize(450, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(10 ,40);
 		
 		b_ok = new Boutons1("ok", this);
 		this.panel_reglage = new JPanel();
 		panel_reglage.setBackground(Color.white);
-		panel_reglage.setLayout(new GridLayout(6,2));
-		panel_reglage.add(lab);
+		panel_reglage.setLayout(new GridLayout(4,2,5,5));
+		
 		panel_reglage.add(boite_combo);
-		panel_reglage.add(lab2);
 		panel_reglage.add(champ_voit);
+		panel_reglage.add(champ_route);
+		panel_reglage.add(champ_vmax);
+		panel_reglage.add(champ_proba1);
+		panel_reglage.add(champ_proba2);
+		panel_reglage.add(champ_proba3);
 		
 		
-		//ï¿½ la fin
+		//celui ci à la fin
 		panel_reglage.add(b_ok);
 		this.setContentPane(panel_reglage);
 
@@ -114,7 +124,7 @@ public class Fond extends JFrame  implements ActionListener{
 	public void actionPerformed(ActionEvent evenement) {
 		String bouton_appuye = evenement.getActionCommand();
 
-		if(bouton_appuye == "incrï¿½mente"){
+		if(bouton_appuye == "incrément"){
 			route.step();
 			fond.repaint();
 		}
@@ -141,7 +151,8 @@ public class Fond extends JFrame  implements ActionListener{
 		}
 		else if(bouton_appuye == "ok"){
 			System.out.println("la valeur entrez dans le champ est : " + champ_voit.getText() );
-			//code qui set toutes les valeurs prï¿½sentes dans la fenï¿½tre de rï¿½galge.
+			//insérer ici le code qui "set" toutes les valeurs présentes dans la fenêtre de réglage, avec la méthode getText() 
+			//pour récupérer ce qui est entré au clavier.
 		}
 
 		else{
@@ -253,7 +264,7 @@ public class Fond extends JFrame  implements ActionListener{
 			}else{
 				vit_anim=500;
 			}
-			System.out.println("la vitesse est ï¿½ " + vit_anim);
+			System.out.println("la vitesse est : " + vit_anim);
 		}
 
 		public void set_bool_anim(boolean b){

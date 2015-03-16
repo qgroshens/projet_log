@@ -13,16 +13,14 @@ import javax.swing.JPanel;
 public class Combobox extends JComboBox implements ActionListener{
 	static final long serialVersionUID = 1;
 	
-	private String nom;
 	private Fond fen_reglage;
 	private Fond fen_simulation;
 	//private JPanel panel_box;
 	private int vit=0;
 
-	public Combobox(Fond f_reglage, Fond f_simulation, String nom ){
+	public Combobox(Fond f_reglage, Fond f_simulation){
 		this.fen_reglage = f_reglage;
 		this.fen_simulation=f_simulation;
-		this.nom = nom;
 		this.setPreferredSize(new Dimension(100,20));
 
 		this.addActionListener(this);
