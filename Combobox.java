@@ -1,7 +1,6 @@
 package projet_log;
 
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,15 +26,12 @@ public class Combobox extends JComboBox implements ActionListener{
 		this.addActionListener(this);
 		this.addItem("vitesse lente");
 		this.addItem("vitesse moyenne");
-		this.addItem("vitesse rapide");
-		
+		this.addItem("vitesse rapide");	
 	}
 
 	
 	public void actionPerformed(ActionEvent e){
 		String choix = (String)this.getSelectedItem();
-		//System.out.println(""+ this.getSelectedItem());
-		//this.get
 		
 		if (choix == "vitesse lente"){
 			this.vit = 1;
@@ -50,10 +46,5 @@ public class Combobox extends JComboBox implements ActionListener{
 		System.out.println("vit = "+vit);
 
 	}
-	
-/*	public int get_vit(){
-		//f_simulation.affiche_vitesse(vit);
-		return vit;
-	}
-*/
+
 }

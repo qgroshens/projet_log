@@ -101,13 +101,6 @@ public class Fond extends JFrame  implements ActionListener{
 			route.step();
 			fond.repaint();
 		}
-		/*else if (bouton_appuye == "dodo"){
-			//rend le bouton cliquable ou non : mais ne marche pas avec thread.sleep()
-			b.setEnabled(false);
-			System.out.println("au lit");	
-			b.setEnabled(true);
-			System.out.println("debout");
-		}*/
 		else if (bouton_appuye == "start/stop"){
 
 			if(compteur == false){
@@ -139,30 +132,13 @@ public class Fond extends JFrame  implements ActionListener{
 		this.vit_index=vit_index;
 	}
 
-	/*public void actionPerformed(ActionEvent evnmt) {
-
-		if(evnmt.getSource() == "incrémente"){
-			test.inc_numero();
-		}
-		else if(evnmt.getSource() == "décrémente"){
-			test.dec_numero();
-		}
-		else if (evnmt.getSource() == "affiche"){
-			test.affiche_numero();
-		}
-		else{
-			System.out.println("un autre bouton svp");
-		}
-
-	}*/
 
 
-
-
-
-
-
-
+	
+//======================================================================================================================================//
+//=====================================================================================================================================//
+//====================================================================================================================================//
+	
 
 	public class Panneau extends JPanel implements Runnable{
 		static final long serialVersionUID = 1;	
@@ -236,7 +212,6 @@ public class Fond extends JFrame  implements ActionListener{
 				}
 
 				try {
-					//Thread.sleep(300);
 					Thread.sleep(vit_anim);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -264,8 +239,3 @@ public class Fond extends JFrame  implements ActionListener{
 
 	}
 }
-
-
-
-
-
