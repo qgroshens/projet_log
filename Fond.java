@@ -31,8 +31,9 @@ public class Fond extends JFrame  implements ActionListener{
 	private int vit_index;
 	private JLabel lab;
 	private JLabel lab2;
+	private Affichage affichage;
 
-	public Fond(route route){
+	public Fond(route route,Affichage affiche){
 
 		this.setVisible(true);
 		this.fond = new Panneau();
@@ -46,7 +47,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.liste = route.get_route();
 
 		//les boutons
-		b_increment = new Boutons1("incrémente", this);
+		b_increment = new Boutons1("incrï¿½mente", this);
 		b_startstop = new Boutons1("start/stop", this);
 		b_startstop.setBounds(this.getWidth()/2-60, 10,90,50);
 		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);
@@ -62,7 +63,7 @@ public class Fond extends JFrame  implements ActionListener{
 		compteur_step.setBounds(10, 5,500,100);
 		fond.add(compteur_step);
 
-		//labels des numéros de voitures
+		//labels des numï¿½ros de voitures
 		label_num_voit = new JLabel[route.get_nb_voit()];
 		Font police2 = new Font("Tahoma", Font.BOLD, 15); 
 
@@ -79,7 +80,7 @@ public class Fond extends JFrame  implements ActionListener{
 		//les boites de dialogue
 		this.boite_combo = new Combobox(this,f_simulation, "plop");
 		this.champ_voit = new ChampText(this,f_simulation, "entez ici le nombre de voiture voulu");
-		//les labels pour que ça fasse beau
+		//les labels pour que ï¿½a fasse beau
 		this.lab = new JLabel();
 		this.lab2 = new JLabel();
 		lab.setText("vitesse de l'animation");
@@ -100,7 +101,7 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(champ_voit);
 		
 		
-		//à la fin
+		//ï¿½ la fin
 		panel_reglage.add(b_ok);
 		this.setContentPane(panel_reglage);
 
@@ -112,7 +113,7 @@ public class Fond extends JFrame  implements ActionListener{
 	public void actionPerformed(ActionEvent evenement) {
 		String bouton_appuye = evenement.getActionCommand();
 
-		if(bouton_appuye == "incrémente"){
+		if(bouton_appuye == "incrï¿½mente"){
 			route.step();
 			fond.repaint();
 		}
@@ -139,7 +140,7 @@ public class Fond extends JFrame  implements ActionListener{
 		}
 		else if(bouton_appuye == "ok"){
 			System.out.println("la valeur entrez dans le champ est : " + champ_voit.getText() );
-			//code qui set toutes les valeurs présentes dans la fenêtre de régalge.
+			//code qui set toutes les valeurs prï¿½sentes dans la fenï¿½tre de rï¿½galge.
 		}
 
 		else{
@@ -177,16 +178,16 @@ public class Fond extends JFrame  implements ActionListener{
 		public void paintComponent(Graphics g){
 
 			super.paintComponents(g);		
-			int nb_case = liste.length; //nombre de cellule à dessiner sur la route
+			int nb_case = liste.length; //nombre de cellule ï¿½ dessiner sur la route
 			int largueur=this.getWidth();
 			int hauteur= this.getHeight();
 
 			super.paintComponents(g);
 
-			int marge = 5; //les marges à gauche et à droite de la route
-			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases à dessiner
+			int marge = 5; //les marges ï¿½ gauche et ï¿½ droite de la route
+			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases ï¿½ dessiner
 
-			g.setColor(Color.blue); //fond de la fenêtre d'interface
+			g.setColor(Color.blue); //fond de la fenï¿½tre d'interface
 			g.fillRect(0, 0, largueur, this.getHeight());
 
 			g.setColor(Color.gray); //dessin de la route (x1,y1,x2,y2)
@@ -207,7 +208,7 @@ public class Fond extends JFrame  implements ActionListener{
 					g.fillRect(taille_case*k+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 
 
-					compteur_step.setText("incrément n° " + route.get_temps());
+					compteur_step.setText("incrï¿½ment nï¿½ " + route.get_temps());
 					label_num_voit[liste[k]-1].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 					count++;
 				}
@@ -219,12 +220,13 @@ public class Fond extends JFrame  implements ActionListener{
 
 		//methode abstract venant de implements Runnable
 		public void run(){
-			//System.out.println("on est bien là!");
+			//System.out.println("on est bien lï¿½!");
 			set_vitesse_animation(vit_index);
 			while(b_run){
 				
 				route.step();
-
+				affichage.setMatrice(route.get_matrice_densite());
+				affichage.refresh();
 				repaint();
 				if(modeDensite){
 					//route.ecrireDensiteText();
@@ -250,7 +252,7 @@ public class Fond extends JFrame  implements ActionListener{
 			}else{
 				vit_anim=500;
 			}
-			System.out.println("la vitesse est à " + vit_anim);
+			System.out.println("la vitesse est ï¿½ " + vit_anim);
 		}
 
 		public void set_bool_anim(boolean b){

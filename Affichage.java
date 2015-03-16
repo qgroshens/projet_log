@@ -19,7 +19,7 @@ public class Affichage extends JFrame {
 
 
 
-	public Affichage(double[][]matrice){
+	public Affichage(){
 		this.setVisible(true);
 		this.trace = new Trace();
 		trace.setPreferredSize(new Dimension(640, 480)); //
@@ -29,12 +29,17 @@ public class Affichage extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setContentPane(trace);
+		this.setForeground(Color.gray);
 	}
 	
 	public void setMatrice(double[][]matrice){
 		this.matrice=matrice;
 		longMax=matrice.length;
 		tMax=matrice[0].length;
+		trace.init_dim();
+	}
+	public void refresh(){
+		trace.repaint();
 	}
 
 
@@ -52,11 +57,9 @@ public class Affichage extends JFrame {
 		public void init_dim(){
 			longueur_case=Math.round(this.getWidth()/longMax);
 			hauteur_case=Math.round(this.getHeight()/tMax);
-			this.setForeground(Color.gray);
+			
 		}
-		public void MaJ(){
-			repaint();
-		}
+
 		
 		public void paintComponent(Graphics g){
 

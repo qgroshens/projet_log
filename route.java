@@ -65,6 +65,7 @@ public class route {
 	}
 
 	public void step() {
+		
 		boolean sortie;
 		temps++;
 		for(i=0;i<nb_voiture;i++){
@@ -77,8 +78,9 @@ public class route {
 				incrBebit();
 			}
 		}
-		sortieDensiteTexte();
-		sortieVoitureTexte();
+		matrice_densite();
+		//sortieDensiteTexte();
+		//sortieVoitureTexte();
 	}
 
 	public double getDebit() {
@@ -95,6 +97,7 @@ public class route {
 
 	public double simulation(){
 		boolean sortie;
+		
 		do{
 			//System.out.println("tour restant "+temps);
 			for(i=0;i<nb_voiture;i++){
