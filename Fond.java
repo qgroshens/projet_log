@@ -187,7 +187,7 @@ public class Fond extends JFrame  implements ActionListener{
 
 
 					compteur_step.setText("incrément n° " + route.get_temps());
-					label_num_voit[count].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
+					label_num_voit[liste[k]-1].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 					count++;
 				}
 			}
