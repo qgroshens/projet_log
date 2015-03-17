@@ -25,9 +25,10 @@ public class Affichage extends JFrame {
 		trace.setPreferredSize(new Dimension(640, 480)); //
 		trace.setLayout(null);//
 		this.setTitle("Affichage densite");
-		this.setSize(4000, 500);
+		this.setSize(600, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
+		this.setLocation(this.getWidth(),5);
+		
 		this.setContentPane(trace);
 		this.setForeground(Color.gray);
 	}

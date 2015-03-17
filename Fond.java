@@ -46,7 +46,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.setTitle("Interface Graphique");
 		this.setSize(4000, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
+		this.setLocation(5,4*this.getHeight()/6);
 		this.route=route;
 		this.liste = route.get_route();
 		this.affichage=affiche;
@@ -68,7 +68,7 @@ public class Fond extends JFrame  implements ActionListener{
 		compteur_step.setBounds(10, 5,500,100);
 		fond.add(compteur_step);
 
-		//labels des numï¿½ros de voitures
+		//labels des numéros de voitures
 		label_num_voit = new JLabel[route.get_nb_voit()];
 		Font police2 = new Font("Tahoma", Font.BOLD, 15); 
 
@@ -80,7 +80,7 @@ public class Fond extends JFrame  implements ActionListener{
 		}
 		this.getContentPane().add(fond);
 	}
-	
+
 	
 	public Fond(String nom_box,Fond f_simulation){
 		//les boites de dialogue
@@ -96,12 +96,12 @@ public class Fond extends JFrame  implements ActionListener{
 		this.setTitle(nom_box);
 		this.setSize(450, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocation(10 ,40);
+		this.setLocation(5 ,5);
 		
 		b_ok = new Boutons1("ok", this);
 		this.panel_reglage = new JPanel();
 		panel_reglage.setBackground(Color.white);
-		panel_reglage.setLayout(new GridLayout(4,2,5,5));
+		panel_reglage.setLayout(new GridLayout(4,2,3,3));
 		
 		panel_reglage.add(boite_combo);
 		panel_reglage.add(champ_voit);
