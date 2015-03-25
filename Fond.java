@@ -32,10 +32,13 @@ public class Fond extends JFrame  implements ActionListener{
 	private ChampText champ_proba1;
 	private ChampText champ_proba2;
 	private ChampText champ_proba3;
+	private ChampText champ_seuil;
+	private ChampText champ_bool_regu;
 	
 	private JPanel panel_reglage;
 	private int vit_index;
 	private Affichage affichage;
+	private Parametrage f_parametrage;
 
 	public Fond(route route,Affichage affiche){
 
@@ -82,15 +85,19 @@ public class Fond extends JFrame  implements ActionListener{
 	}
 
 	
-	public Fond(String nom_box,Fond f_simulation){
+	public Fond(String nom_box){
+		f_parametrage = new Parametrage();
+		
 		//les boites de dialogue
-		this.boite_combo = new Combobox(this,f_simulation);
-		this.champ_voit = new ChampText(this,f_simulation, "Nombre de voiture");
-		this.champ_route = new ChampText(this,f_simulation, "Taille de la route");
-		this.champ_vmax = new ChampText(this,f_simulation, "Vitesse max (case/unité de temps)");
-		this.champ_proba1 = new ChampText(this,f_simulation, "Probabilité de ralentir pour rien");
-		this.champ_proba2 = new ChampText(this,f_simulation, "Probabilité de ne pas redémarrer");
-		this.champ_proba3 = new ChampText(this,f_simulation, "Probabilité de freiner brutalement");
+		this.boite_combo = new Combobox(this);
+		this.champ_voit = new ChampText(this,"Nombre de voiture");
+		this.champ_route = new ChampText(this,"Taille de la route");
+		this.champ_vmax = new ChampText(this,"Vitesse max (case/unité de temps)");
+		this.champ_proba1 = new ChampText(this, "Probabilité de ralentir pour rien");
+		this.champ_proba2 = new ChampText(this,"Probabilité de ne pas redémarrer");
+		this.champ_proba3 = new ChampText(this,"Probabilité de freiner brutalement");
+		this.champ_seuil = new ChampText(this,"seuil densité de régulation");
+		this.champ_bool_regu =  new ChampText(this,"Y/N");
 
 		//du code utile mais chiant
 		this.setTitle(nom_box);
@@ -101,7 +108,7 @@ public class Fond extends JFrame  implements ActionListener{
 		b_ok = new Boutons1("ok", this);
 		this.panel_reglage = new JPanel();
 		panel_reglage.setBackground(Color.white);
-		panel_reglage.setLayout(new GridLayout(4,2,3,3));
+		panel_reglage.setLayout(new GridLayout(5,2,3,3));
 		
 		panel_reglage.add(boite_combo);
 		panel_reglage.add(champ_voit);
@@ -110,6 +117,7 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(champ_proba1);
 		panel_reglage.add(champ_proba2);
 		panel_reglage.add(champ_proba3);
+		panel_reglage.add(champ_seuil);
 		
 		
 		//celui ci à la fin
@@ -146,7 +154,18 @@ public class Fond extends JFrame  implements ActionListener{
 			}
 		}
 		else if(bouton_appuye == "ok"){
-			System.out.println("la valeur entrez dans le champ est : " + champ_voit.getText() );
+			boolean reg;
+			if (champ_bool_regu.getText() == "Y"){
+				reg = true;
+			}
+			else if(champ_bool_regu.getText() == "O"){
+				reg = false;
+			}
+			else{
+				
+			}
+			f_parametrage.set_parametre(champ_voit.getText(), champ_route.getText(), champ_vmax.getText(), champ_proba1.getText(), champ_proba2.getText(), champ_proba3.getText(), champ_seuil.getText(), reg);
+			//System.out.println("la valeur entrez dans le champ est : " + champ_voit.getText() );
 			//insérer ici le code qui "set" toutes les valeurs présentes dans la fenêtre de réglage, avec la méthode getText() 
 			//pour récupérer ce qui est entré au clavier.
 		}

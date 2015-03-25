@@ -14,13 +14,11 @@ public class Combobox extends JComboBox implements ActionListener{
 	static final long serialVersionUID = 1;
 	
 	private Fond fen_reglage;
-	private Fond fen_simulation;
 	//private JPanel panel_box;
 	private int vit=0;
 
-	public Combobox(Fond f_reglage, Fond f_simulation){
+	public Combobox(Fond f_reglage){
 		this.fen_reglage = f_reglage;
-		this.fen_simulation=f_simulation;
 		this.setPreferredSize(new Dimension(100,20));
 
 		this.addActionListener(this);
@@ -42,7 +40,7 @@ public class Combobox extends JComboBox implements ActionListener{
 		else{
 			this.vit = 3;	
 		}
-		fen_simulation.set_vitesse(vit);
+		//fen_simulation.set_vitesse(vit);
 
 	}
 
