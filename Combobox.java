@@ -43,7 +43,6 @@ public class Combobox extends JComboBox implements ActionListener{
 			this.vit = 3;	
 		}
 		fen_simulation.set_vitesse(vit);
-		System.out.println("vit = "+vit);
 
 	}
 

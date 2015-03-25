@@ -132,18 +132,14 @@ public class Fond extends JFrame  implements ActionListener{
 
 			if(compteur == false){
 				b_increment.setEnabled(false);
-				System.out.println("start");
 				fond.set_bool_anim(true);
 				this.t = new Thread(fond);
 				fond.set_bool_anim(true);
 				t.start();
 				compteur = true;
-
 			}
 			else
 			{
-				System.out.println("stop");
-
 				fond.set_bool_anim(false);
 				compteur = false;
 				b_increment.setEnabled(true);
@@ -212,7 +208,6 @@ public class Fond extends JFrame  implements ActionListener{
 
 			//dessine les voitures dans les cases
 			g.setColor(Color.red);
-			int count = 0;
 			for(int k=0; k<liste.length; k++){
 
 				if(liste[k]>0){
@@ -222,12 +217,10 @@ public class Fond extends JFrame  implements ActionListener{
 
 					compteur_step.setText("incrément n° " + route.get_temps());
 					label_num_voit[liste[k]-1].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
-					count++;
 				}
 			}
 
 		}
-
 
 
 		//methode abstract venant de implements Runnable
@@ -264,7 +257,6 @@ public class Fond extends JFrame  implements ActionListener{
 			}else{
 				vit_anim=500;
 			}
-			System.out.println("la vitesse est : " + vit_anim);
 		}
 
 		public void set_bool_anim(boolean b){
