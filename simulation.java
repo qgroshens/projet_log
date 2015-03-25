@@ -10,7 +10,7 @@ public class simulation {
 		route.init_matrice_densite(60, 300);
 		Affichage affichage=new Affichage();
 		Fond fenetre = new Fond(route,affichage);
-		Fond fenetre_reglage = new Fond("Entrez vos donnez ci-dessous",fenetre);
+		Fond fenetre_reglage = new Fond("Entrez vos donnez ci-dessous");
 		
 		/*for(int i=0;i<200;i++){
 			route.step();

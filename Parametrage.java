@@ -16,7 +16,7 @@ public class Parametrage {
 
 	}
 
-	public void set_parametre (int nb_voit, int taille, int vit, double pral, double pdemar, double plapin, double seuil, boolean reg){
+	public void set_parametres (int nb_voit, int taille, int vit, double pral, double pdemar, double plapin, double seuil, boolean reg){
 		nombre_voiture = nb_voit;
 		taille_route = taille;
 		vitesse_max = vit;

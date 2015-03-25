@@ -34,6 +34,7 @@ public class Fond extends JFrame  implements ActionListener{
 	private ChampText champ_proba3;
 	private ChampText champ_seuil;
 	private ChampText champ_bool_regu;
+	private boolean reg; //est-ce qu'on met une régulation des bouchon en place
 	
 	private JPanel panel_reglage;
 	private int vit_index;
@@ -97,7 +98,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.champ_proba2 = new ChampText(this,"Probabilité de ne pas redémarrer");
 		this.champ_proba3 = new ChampText(this,"Probabilité de freiner brutalement");
 		this.champ_seuil = new ChampText(this,"seuil densité de régulation");
-		this.champ_bool_regu =  new ChampText(this,"Y/N");
+		this.champ_bool_regu =  new ChampText(this,"régulation de vitesse Y/N ?");
 
 		//du code utile mais chiant
 		this.setTitle(nom_box);
@@ -118,6 +119,7 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(champ_proba2);
 		panel_reglage.add(champ_proba3);
 		panel_reglage.add(champ_seuil);
+		panel_reglage.add(champ_bool_regu);
 		
 		
 		//celui ci à la fin
@@ -154,20 +156,20 @@ public class Fond extends JFrame  implements ActionListener{
 			}
 		}
 		else if(bouton_appuye == "ok"){
-			boolean reg;
+			
+			
 			if (champ_bool_regu.getText() == "Y"){
 				reg = true;
 			}
-			else if(champ_bool_regu.getText() == "O"){
+			else if(champ_bool_regu.getText() == "N"){
 				reg = false;
 			}
 			else{
-				
+				System.out.println("va te faire foutre, j'ai dis Y ou N, donc fait pas chier et met pas autre chose");
 			}
-			f_parametrage.set_parametre(champ_voit.getText(), champ_route.getText(), champ_vmax.getText(), champ_proba1.getText(), champ_proba2.getText(), champ_proba3.getText(), champ_seuil.getText(), reg);
-			//System.out.println("la valeur entrez dans le champ est : " + champ_voit.getText() );
-			//insérer ici le code qui "set" toutes les valeurs présentes dans la fenêtre de réglage, avec la méthode getText() 
-			//pour récupérer ce qui est entré au clavier.
+			
+			f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()),  Double.parseDouble(champ_proba1.getText()),  Double.parseDouble(champ_proba2.getText()),  Double.parseDouble(champ_proba3.getText()),  Double.parseDouble(champ_seuil.getText()), reg);
+
 		}
 
 		else{
