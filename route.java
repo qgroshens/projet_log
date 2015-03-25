@@ -213,8 +213,8 @@ public class route {
 		
 	}
 	public void matrice_densite(){
-		for(int i=0;i<longueur;i++){
-			matrice_densite[i][itteration]=get_densite(i);
+		for(int k=0;k<longueur;k++){
+			matrice_densite[k][itteration]=get_densite(k);
 	}
 		++itteration; 
 	}

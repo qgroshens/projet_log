@@ -65,11 +65,11 @@ public class Affichage extends JFrame {
 		public void paintComponent(Graphics g){
 
 			super.paintComponents(g);
-			for(int i=tMax-1;i>0;i--){//parcour le temps
+			for(int i=0;i<tMax;i++){//parcour le temps
 				for(int k=0;k<longMax;k++){//parcour l'espace
-					Color densite=new Color((int)(matrice[k][i]*100), 0, 0);
+					Color densite=new Color((int)(matrice[k][i]*255), 0, 0);
 					g.setColor(densite);
-					g.fillRect(k*longueur_case,i*hauteur_case,longueur_case,hauteur_case);//xdebut,ydebut,largeur,hauteur
+					g.fillRect(k*longueur_case,this.getHeight()-i*hauteur_case,longueur_case,hauteur_case);//xdebut,ydebut,largeur,hauteur
 
 				}
 			}
