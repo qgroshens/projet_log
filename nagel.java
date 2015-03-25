@@ -11,15 +11,14 @@ public class nagel extends model {
 	int position;
 	int devant;
 
-	nagel(int vmax, int longueur, double p,double p2,double p3){
-		this.vmax=vmax;
+	nagel(int longueur, double p,double p2,double p3){
 		this.p=p;
 		this.p2=p2;
 		this.p3=p3;
 		this.longueur=longueur;
 	}
 
-	void maj_vitesse(voiture voit){
+	void maj_vitesse(voiture voit,int vmax){
 		v=voit.get_vitesse();
 		position=voit.get_position();
 		devant=voit.get_devant().get_position();
@@ -39,7 +38,7 @@ public class nagel extends model {
 					v=Math.min(v+1,vmax);
 
 				}else{
-					v=gap;
+					v=Math.min(gap,vmax);
 				}
 				if ((v > 0) && (Math.random() <= p)) {
 					v--;

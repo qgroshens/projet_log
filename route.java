@@ -29,16 +29,18 @@ public class route {
 	private String Newligne=System.getProperty("line.separator"); 
 	private double[][]matrice_densite;
 	private int itteration;
+	private double seuil;
 
-	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2,double p3){
+	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2,double p3,double seuil){
 		this.vmax=vmax;
+		this.seuil=seuil;
 		this.longueur=longueur;
 		this.nb_voiture=nb_voiture;
 		this.nb_itteration=nb_itt;
 		liste_voit=new voiture[nb_voiture];
 		route=new int[longueur];
 		voiture_devant=null;
-		model= new nagel(vmax,longueur,p,p2,p3);
+		model= new nagel(longueur,p,p2,p3);
 		position=new int[nb_voiture];
 	}
 
@@ -65,11 +67,12 @@ public class route {
 	}
 
 	public void step() {
-		
+		int vmax_local=vmax;
 		boolean sortie;
 		temps++;
 		for(i=0;i<nb_voiture;i++){
-			model.maj_vitesse(liste_voit[i]);
+			vmax_local=this.regulation(i);
+			model.maj_vitesse(liste_voit[i], vmax_local);
 			
 		}
 		for(i=0;i<nb_voiture;i++){
@@ -81,6 +84,22 @@ public class route {
 		matrice_densite();
 		//sortieDensiteTexte();
 		//sortieVoitureTexte();
+	}
+
+	private int regulation(int position) {
+		double densiteMoy=0;
+		int vmax_locale;
+		int horizon=2;
+		for(int i=0;i<5;i++){
+			densiteMoy=densiteMoy+this.get_densite((position+horizon+i)%longueur);
+		}
+		densiteMoy=densiteMoy/5;
+		if(densiteMoy<seuil){
+			vmax_locale=vmax;
+		}else{
+			vmax_locale=(int)(vmax/2);
+		}
+		return vmax_locale;
 	}
 
 	public double getDebit() {
@@ -95,13 +114,13 @@ public class route {
 		
 	}
 
-	public double simulation(){
+	public double simulation(){//plus utilisé normalement
 		boolean sortie;
 		
 		do{
 			//System.out.println("tour restant "+temps);
 			for(i=0;i<nb_voiture;i++){
-				model.maj_vitesse(liste_voit[i]);
+				model.maj_vitesse(liste_voit[i], vmax);
 				
 			}
 			for(i=0;i<nb_voiture;i++){

@@ -5,7 +5,7 @@ package projet_log;
 public class simulation {
 
 	public static void main (String[] args){
-		route route=new route(5,60,15,100,0.2,0.01,0.0001);//int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2
+		route route=new route(6,60,20,100,0.2,0.00,0.0000,0.8);//int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2
 		route.creation();
 		route.init_matrice_densite(60, 300);
 		Affichage affichage=new Affichage();
