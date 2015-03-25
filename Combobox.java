@@ -40,8 +40,9 @@ public class Combobox extends JComboBox implements ActionListener{
 		else{
 			this.vit = 3;	
 		}
-		//fen_simulation.set_vitesse(vit);
 
+		fen_reglage.set_vitesse(vit);
+		
 	}
 
 }

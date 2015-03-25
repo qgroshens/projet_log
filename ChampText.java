@@ -14,7 +14,6 @@ public class ChampText extends JFormattedTextField {
 	
 
 	public ChampText(Fond f_reglage, String text_init ){
-		super(NumberFormat.getIntegerInstance());
 		this.fen_reglage = f_reglage;
 		this.setPreferredSize(new Dimension(100,20));
 		this.setText(text_init);

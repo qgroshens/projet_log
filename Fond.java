@@ -7,9 +7,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class Fond extends JFrame  implements ActionListener{
 	static final long serialVersionUID = 1;	
@@ -25,6 +27,10 @@ public class Fond extends JFrame  implements ActionListener{
 	private JLabel compteur_step = new JLabel(); 
 	private JLabel label_num_voit[];
 	private boolean modeDensite;
+	
+	private JRadioButton seuil_on;
+	private JRadioButton seuil_off;
+	private ButtonGroup bg = new ButtonGroup();
 	private Combobox boite_combo;
 	private ChampText champ_voit;
 	private ChampText champ_route;
@@ -33,16 +39,14 @@ public class Fond extends JFrame  implements ActionListener{
 	private ChampText champ_proba2;
 	private ChampText champ_proba3;
 	private ChampText champ_seuil;
-	private ChampText champ_bool_regu;
-	private boolean reg; //est-ce qu'on met une régulation des bouchon en place
+	private boolean reg; //est-ce qu'on met une régulation des bouchons en place y/n
 	
 	private JPanel panel_reglage;
-	private int vit_index;
+	private static int vit_index;
 	private Affichage affichage;
 	private Parametrage f_parametrage;
 
 	public Fond(route route,Affichage affiche){
-
 		this.setVisible(true);
 		this.fond = new Panneau();
 		fond.setPreferredSize(new Dimension(640, 480)); 
@@ -54,6 +58,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.route=route;
 		this.liste = route.get_route();
 		this.affichage=affiche;
+		
 
 		//les boutons
 		b_increment = new Boutons1("incrément", this);
@@ -83,6 +88,7 @@ public class Fond extends JFrame  implements ActionListener{
 			fond.add(label_num_voit[k]);
 		}
 		this.getContentPane().add(fond);
+		this.setVisible(true);
 	}
 
 	
@@ -98,7 +104,18 @@ public class Fond extends JFrame  implements ActionListener{
 		this.champ_proba2 = new ChampText(this,"Probabilité de ne pas redémarrer");
 		this.champ_proba3 = new ChampText(this,"Probabilité de freiner brutalement");
 		this.champ_seuil = new ChampText(this,"seuil densité de régulation");
-		this.champ_bool_regu =  new ChampText(this,"régulation de vitesse Y/N ?");
+		
+		//les radiobuttons
+		this.seuil_on = new JRadioButton("activer les seuils");
+		this.seuil_off = new JRadioButton("desactiver les seuils");
+		seuil_on.addActionListener(this);
+		seuil_off.addActionListener(this);
+		bg.add(seuil_off);
+		bg.add(seuil_on);
+		
+
+		
+		//this.champ_bool_regu =  new ChampText(this,"régulation de vitesse Y/N ?");
 
 		//du code utile mais chiant
 		this.setTitle(nom_box);
@@ -112,6 +129,8 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.setLayout(new GridLayout(5,2,3,3));
 		
 		panel_reglage.add(boite_combo);
+		panel_reglage.add(seuil_on);
+		panel_reglage.add(seuil_off);
 		panel_reglage.add(champ_voit);
 		panel_reglage.add(champ_route);
 		panel_reglage.add(champ_vmax);
@@ -119,7 +138,8 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(champ_proba2);
 		panel_reglage.add(champ_proba3);
 		panel_reglage.add(champ_seuil);
-		panel_reglage.add(champ_bool_regu);
+
+		//panel_reglage.add(champ_bool_regu);
 		
 		
 		//celui ci à la fin
@@ -156,27 +176,34 @@ public class Fond extends JFrame  implements ActionListener{
 			}
 		}
 		else if(bouton_appuye == "ok"){
+			//if(champ_voit.getText())
+			/*this.boite_combo = new Combobox(this);
+		this.champ_voit = new ChampText(this,"Nombre de voiture");
+		this.champ_route = new ChampText(this,"Taille de la route");
+		this.champ_vmax = new ChampText(this,"Vitesse max (case/unité de temps)");
+		this.champ_proba1 = new ChampText(this, "Probabilité de ralentir pour rien");
+		this.champ_proba2 = new ChampText(this,"Probabilité de ne pas redémarrer");
+		this.champ_proba3 = new ChampText(this,"Probabilité de freiner brutalement");
+		this.champ_seuil*/
 			
-			
-			if (champ_bool_regu.getText() == "Y"){
+			System.out.println("");
+				if (seuil_on.isSelected()){
 				reg = true;
 			}
-			else if(champ_bool_regu.getText() == "N"){
+			else{
 				reg = false;
 			}
-			else{
-				System.out.println("va te faire foutre, j'ai dis Y ou N, donc fait pas chier et met pas autre chose");
-			}
+
 			
 			f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()),  Double.parseDouble(champ_proba1.getText()),  Double.parseDouble(champ_proba2.getText()),  Double.parseDouble(champ_proba3.getText()),  Double.parseDouble(champ_seuil.getText()), reg);
-
+			//simulation.set_attente(false);
 		}
 
 		else{
-			System.out.println("un autre bouton svp");
+			
 		}
-
 	}
+	
 	
 	public void set_vitesse(int vit_index){
 		this.vit_index=vit_index;

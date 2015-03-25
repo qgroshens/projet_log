@@ -52,6 +52,7 @@ public class Parametrage {
 	public boolean get_regulation(){
 		return regulation;
 	}
+	
 }
 
 

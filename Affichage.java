@@ -20,7 +20,7 @@ public class Affichage extends JFrame {
 
 
 	public Affichage(){
-		this.setVisible(true);
+		
 		this.trace = new Trace();
 		trace.setPreferredSize(new Dimension(640, 480)); //
 		trace.setLayout(null);//
@@ -31,6 +31,7 @@ public class Affichage extends JFrame {
 		
 		this.setContentPane(trace);
 		this.setForeground(Color.gray);
+		this.setVisible(true);
 	}
 	
 	public void setMatrice(double[][]matrice){
