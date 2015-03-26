@@ -12,15 +12,15 @@ import javax.swing.JPanel;
 
 public class Affichage extends JFrame {
 	static final long serialVersionUID = 1;
+	
 	private Trace trace;
 	private double[][] matrice;
 	private int tMax;
 	private int longMax;
 
 
-
 	public Affichage(){
-		
+
 		this.trace = new Trace();
 		trace.setPreferredSize(new Dimension(600, 600)); //
 		trace.setLayout(null);//
@@ -28,12 +28,12 @@ public class Affichage extends JFrame {
 		this.setSize(600, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(this.getWidth(),5);
-		
+
 		this.setContentPane(trace);
 		this.setForeground(Color.gray);
 		this.setVisible(true);
 	}
-	
+
 	public void setMatrice(double[][]matrice){
 		this.matrice=matrice;
 		longMax=matrice.length;
@@ -43,7 +43,6 @@ public class Affichage extends JFrame {
 	public void refresh(){
 		trace.repaint();
 	}
-
 
 
 
@@ -59,10 +58,10 @@ public class Affichage extends JFrame {
 		public void init_dim(){
 			longueur_case=Math.round(this.getWidth()/longMax);
 			hauteur_case=Math.round(this.getHeight()/tMax);
-			
+
 		}
 
-		
+
 		public void paintComponent(Graphics g){
 			int R;
 			int G;

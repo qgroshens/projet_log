@@ -25,6 +25,7 @@ public class Combobox extends JComboBox implements ActionListener{
 		this.addItem("vitesse lente");
 		this.addItem("vitesse moyenne");
 		this.addItem("vitesse rapide");	
+		this.setSelectedItem("vitesse moyenne");
 	}
 
 

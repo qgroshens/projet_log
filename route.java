@@ -59,11 +59,11 @@ public class route {
 		//affichage(longueur,route);
 		//System.out.println("fin création");
 	}
-	
+
 	public int get_temps(){
 		return temps;
 	}
-	
+
 	public int get_nb_voit(){
 		return nb_voiture;
 	}
@@ -72,21 +72,21 @@ public class route {
 		int vmax_local=vmax;
 		boolean sortie;
 		if(temps<nb_itteration){
-		temps++;
-		for(i=0;i<nb_voiture;i++){
-			vmax_local=this.regulation(i);
-			model.maj_vitesse(liste_voit[i], vmax_local);
-			
-		}
-		for(i=0;i<nb_voiture;i++){
-			sortie=model.maj_position(liste_voit[i]);
-			if(sortie){
-				incrBebit();
+			temps++;
+			for(i=0;i<nb_voiture;i++){
+				vmax_local=this.regulation(i);
+				model.maj_vitesse(liste_voit[i], vmax_local);
+
 			}
-		}
-		matrice_densite();
-		//sortieDensiteTexte();
-		//sortieVoitureTexte();
+			for(i=0;i<nb_voiture;i++){
+				sortie=model.maj_position(liste_voit[i]);
+				if(sortie){
+					incrBebit();
+				}
+			}
+			matrice_densite();
+			//sortieDensiteTexte();
+			//sortieVoitureTexte();
 		}else{
 			System.out.println("Nombre d'interration max atteint");
 			stop=true;
@@ -121,17 +121,17 @@ public class route {
 	private void incrBebit(){
 		debit=(debit*tempsPrecedent+1)/temps;
 		tempsPrecedent=temps;
-		
+
 	}
 
 	public double simulation(){//plus utilisé normalement
 		boolean sortie;
-		
+
 		do{
 			//System.out.println("tour restant "+temps);
 			for(i=0;i<nb_voiture;i++){
 				model.maj_vitesse(liste_voit[i], vmax);
-				
+
 			}
 			for(i=0;i<nb_voiture;i++){
 				sortie=model.maj_position(liste_voit[i]);
@@ -157,9 +157,9 @@ public class route {
 		espace[0]=position-2;
 
 		if(espace[0]<0)
-			{espace[0]=longueur+espace[0];}
+		{espace[0]=longueur+espace[0];}
 		if(espace[1]<0)
-			{espace[1]=longueur+espace[1];}
+		{espace[1]=longueur+espace[1];}
 		for(int i=0;i<5;i++){
 			if(route[espace[i]]!=0){
 				switch(i){
@@ -179,8 +179,8 @@ public class route {
 					presence=presence+1;
 					break;
 				}
-				
-				
+
+
 			}
 		}
 
@@ -239,12 +239,12 @@ public class route {
 	public void init_matrice_densite(int longueur, int nb_itteration){
 		matrice_densite=new double[longueur][nb_itteration];
 		itteration=0;
-		
+
 	}
 	public void matrice_densite(){
 		for(int k=0;k<longueur;k++){
 			matrice_densite[k][itteration]=get_densite(k);
-	}
+		}
 		++itteration; 
 	}
 	public double[][] get_matrice_densite(){
@@ -271,13 +271,13 @@ public class route {
 		for(int n=0;n<longueur;n++){
 			double densite_local=get_densite(n);
 			System.out.print(densite_local+":");
-			
+
 		}
 		System.out.println("//");
-		
+
 	}
 	private void sortieDensiteTexte(){
-		
+
 		densiteTexte=densiteTexte+Newligne+"[";
 		for(int n=0;n<longueur;n++){
 			double densite_local=get_densite(n);
@@ -285,8 +285,8 @@ public class route {
 		}
 		densiteTexte=densiteTexte+"]"+Newligne;
 	}
-private void sortieVoitureTexte(){
-		
+	private void sortieVoitureTexte(){
+
 		voitureTexte=voitureTexte+Newligne+"[";
 		for(int k=0;k<longueur;k++){
 			if(route[k]==0){
@@ -298,48 +298,48 @@ private void sortieVoitureTexte(){
 		}
 		voitureTexte=voitureTexte+"]"+Newligne;
 	}
-	
-	
+
+
 	public void ecrireDensiteText(){
-		 	final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\densiteVal.m";
-	        final File fichier =new File(chemin); 
-	        try {
-	            // Creation du fichier
-	            fichier .createNewFile();
-	            // creation d'un writer (un �crivain)
-	            final FileWriter writer = new FileWriter(fichier);
-	            try {
-	            	writer.write("densite=["+Newligne);
-	                writer.write(densiteTexte);
-	                writer.write("];");
-	            } finally {
-	                // quoiqu'il arrive, on ferme le fichier
-	                writer.close();
-	            }
-	        } catch (Exception e) {
-	            System.out.println("Impossible de creer le fichier");
-	        }
+		final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\densiteVal.m";
+		final File fichier =new File(chemin); 
+		try {
+			// Creation du fichier
+			fichier .createNewFile();
+			// creation d'un writer (un �crivain)
+			final FileWriter writer = new FileWriter(fichier);
+			try {
+				writer.write("densite=["+Newligne);
+				writer.write(densiteTexte);
+				writer.write("];");
+			} finally {
+				// quoiqu'il arrive, on ferme le fichier
+				writer.close();
+			}
+		} catch (Exception e) {
+			System.out.println("Impossible de creer le fichier");
+		}
 	}
 	public void ecrireVoitureText(){
-	 	final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\voitureVal.m";
-        final File fichier =new File(chemin); 
-        try {
-            // Creation du fichier
-            fichier .createNewFile();
-            // creation d'un writer (un �crivain)
-            final FileWriter writer = new FileWriter(fichier);
-            try {
-            	writer.write("voiture=["+Newligne);
-                writer.write(voitureTexte);
-                writer.write("];");
-            } finally {
-                // quoiqu'il arrive, on ferme le fichier
-                writer.close();
-            }
-        } catch (Exception e) {
-            System.out.println("Impossible de creer le fichier");
-        }
-}
+		final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\voitureVal.m";
+		final File fichier =new File(chemin); 
+		try {
+			// Creation du fichier
+			fichier .createNewFile();
+			// creation d'un writer (un �crivain)
+			final FileWriter writer = new FileWriter(fichier);
+			try {
+				writer.write("voiture=["+Newligne);
+				writer.write(voitureTexte);
+				writer.write("];");
+			} finally {
+				// quoiqu'il arrive, on ferme le fichier
+				writer.close();
+			}
+		} catch (Exception e) {
+			System.out.println("Impossible de creer le fichier");
+		}
+	}
 	private int[] range(int[] tableau){
 		Arrays.sort(tableau);
 		Collections.reverse(Arrays.asList(tableau));//ArrayUtils.reverse(tableau);

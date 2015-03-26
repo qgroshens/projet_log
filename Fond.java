@@ -18,8 +18,9 @@ public class Fond extends JFrame  implements ActionListener{
 	static final long serialVersionUID = 1;	
 
 
-	//variables utilisï¿½es dans l'interface graphique
+	private static int vit_index;
 
+	//variables utilisées dans l'interface graphique
 	private route route;
 	private Boutons1 b_startstop;
 	private Boutons1 b_increment;
@@ -32,7 +33,7 @@ public class Fond extends JFrame  implements ActionListener{
 	private Thread t;
 
 
-	//variable utilisï¿½es dans la fenetre de rï¿½galge
+	//variable utilisées dans la fenetre de réglage
 	private Boutons1 b_ok;
 	private boolean modeDensite;
 	private Semaphore sema;
@@ -50,12 +51,12 @@ public class Fond extends JFrame  implements ActionListener{
 	private ChampText champ_proba3;
 	private ChampText champ_seuil;
 	private ChampText champ_nb_increment;
-	private boolean reg; //est-ce qu'on met une rï¿½gulation des bouchons en place y/n
+	private boolean reg = false; //est-ce qu'on met une régulation des bouchons en place y/n
 
 	private JPanel panel_reglage;
-	private static int vit_index;
-
 	private Parametrage f_parametrage;
+
+
 
 	public Fond(route route,Affichage affiche){
 		this.setVisible(true);
@@ -72,14 +73,13 @@ public class Fond extends JFrame  implements ActionListener{
 
 
 		//les boutons
-		b_increment = new Boutons1("incrï¿½ment", this);
+		b_increment = new Boutons1("incrément", this);
 		b_startstop = new Boutons1("start/stop", this);
 		b_startstop.setBounds(this.getWidth()/2-60, 10,90,50);
 		b_increment.setBounds(this.getWidth()/2+60, 10,100,50);
 		fond.add(b_startstop);
 		fond.add(b_increment);
 
-		//les labels
 
 		//label compteur de steps
 		Font police = new Font("Tahoma", Font.BOLD, 18); 
@@ -88,7 +88,7 @@ public class Fond extends JFrame  implements ActionListener{
 		compteur_step.setBounds(10, 5,500,100);
 		fond.add(compteur_step);
 
-		//labels des numï¿½ros de voitures
+		//labels des numéros de voitures
 		label_num_voit = new JLabel[route.get_nb_voit()];
 		Font police2 = new Font("Tahoma", Font.BOLD, 15); 
 
@@ -116,7 +116,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.champ_proba1 = new ChampText(this, "Proba de ralentir pour rien");
 		this.champ_proba2 = new ChampText(this,"Proba de ne pas redémarrer");
 		this.champ_proba3 = new ChampText(this,"Proba de freiner brutalement");
-		this.champ_seuil = new ChampText(this,"seuil de régulation");
+		this.champ_seuil = new ChampText(this,"Seuil de régulation [0;1]");
 		this.champ_nb_increment = new ChampText(this, "nombre d'incréments");
 
 
@@ -132,7 +132,6 @@ public class Fond extends JFrame  implements ActionListener{
 		//du code utile mais chiant
 		this.setTitle(nom_box);
 		this.setSize(550, 400);
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(5 ,5);
 
 		b_ok = new Boutons1("ok", this);
@@ -153,10 +152,9 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(champ_seuil);
 
 
-		//celui ci ï¿½ la fin
+		//celui ci à la fin
 		panel_reglage.add(b_ok);
 		this.setContentPane(panel_reglage);
-
 		this.setVisible(true);
 	}
 
@@ -186,7 +184,7 @@ public class Fond extends JFrame  implements ActionListener{
 			}
 		}
 		else if(bouton_appuye == "ok"){
-			
+
 			//gestion de la régulation oui/non
 			if (seuil_on.isSelected()){
 				reg = true;
@@ -194,16 +192,26 @@ public class Fond extends JFrame  implements ActionListener{
 			else{
 				reg = false;
 			}
-			
-			/*champ_voit.get
-			System.out.println(""+champ_voit.getText().getClass());
-			//vérification du contenue des cases 
-			//if(o.getClass().equals(Integer.class))*/
-			
-			
 
-			f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.parseDouble(champ_proba1.getText()),  Double.parseDouble(champ_proba2.getText()),  Double.parseDouble(champ_proba3.getText()),  Double.parseDouble(champ_seuil.getText()), reg);
-			sema.release();
+			//vérification du contenue des cases 
+			try{
+				Integer.valueOf(champ_voit.getText());
+				Integer.valueOf(champ_route.getText());
+				Integer.valueOf(champ_vmax.getText());
+				Integer.valueOf(champ_nb_increment.getText());
+				Double.parseDouble(champ_proba1.getText());
+				Double.parseDouble(champ_proba2.getText());
+				Double.parseDouble(champ_proba3.getText());
+				Double.parseDouble(champ_seuil.getText());
+				
+				f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.parseDouble(champ_proba1.getText()),  Double.parseDouble(champ_proba2.getText()),  Double.parseDouble(champ_proba3.getText()),  Double.parseDouble(champ_seuil.getText()), reg);
+				sema.release();
+				
+			} catch (NumberFormatException e) {
+				System.out.println("les paramètres entrés n'ont pas le bon format");
+			}
+			
+			
 		}
 
 		else{
@@ -244,16 +252,16 @@ public class Fond extends JFrame  implements ActionListener{
 		public void paintComponent(Graphics g){
 
 			super.paintComponents(g);		
-			int nb_case = liste.length; //nombre de cellule ï¿½ dessiner sur la route
+			int nb_case = liste.length; //nombre de cellule à dessiner sur la route
 			int largueur=this.getWidth();
 			int hauteur= this.getHeight();
 
 			super.paintComponents(g);
 
-			int marge = 5; //les marges ï¿½ gauche et ï¿½ droite de la route
-			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases ï¿½ dessiner
+			int marge = 5; //les marges à gauche et ï¿½ droite de la route
+			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases à dessiner
 
-			g.setColor(Color.blue); //fond de la fenï¿½tre d'interface
+			g.setColor(Color.blue); //fond de la fenêtre d'interface
 			g.fillRect(0, 0, largueur, this.getHeight());
 
 			g.setColor(Color.gray); //dessin de la route (x1,y1,x2,y2)
@@ -273,7 +281,7 @@ public class Fond extends JFrame  implements ActionListener{
 					g.fillRect(taille_case*k+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 
 
-					compteur_step.setText("incrï¿½ment nï¿½ " + route.get_temps());
+					compteur_step.setText("incrément n° " + route.get_temps());
 					label_num_voit[liste[k]-1].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 				}
 			}
@@ -283,7 +291,6 @@ public class Fond extends JFrame  implements ActionListener{
 
 		//methode abstract venant de implements Runnable
 		public void run(){
-			//System.out.println("on est bien lï¿½!");
 			set_vitesse_animation(vit_index);
 			while(b_run){
 
@@ -303,7 +310,7 @@ public class Fond extends JFrame  implements ActionListener{
 						e.printStackTrace();
 					}
 				}
-				
+
 			}
 		}
 		public void set_vitesse_animation(int vit){
