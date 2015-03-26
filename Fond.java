@@ -119,10 +119,10 @@ public class Fond extends JFrame  implements ActionListener{
 		this.champ_seuil = new ChampText(this,"Seuil de régulation [0;1]");
 		this.champ_nb_increment = new ChampText(this, "nombre d'incréments");
 
-
 		//les radiobuttons
 		this.seuil_on = new JRadioButton("activer les seuils");
 		this.seuil_off = new JRadioButton("desactiver les seuils");
+		this.seuil_off.setSelected(true);
 		seuil_on.addActionListener(this);
 		seuil_off.addActionListener(this);
 		bg.add(seuil_off);
