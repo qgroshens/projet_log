@@ -28,17 +28,17 @@ public class Fond extends JFrame  implements ActionListener{
 	private int[] liste;
 	private JLabel compteur_step = new JLabel(); 
 	private JLabel label_num_voit[];
+	private Affichage affichage;
+	private Thread t;
 	
 	//variable utilisées dans la fenetre de régalge
 	
 	private Boutons1 b_ok;
 	private boolean modeDensite;
 	private Semaphore sema;
-	
-	private Thread t;
 
 	
-	
+	//les champs 
 	private JRadioButton seuil_on;
 	private JRadioButton seuil_off;
 	private ButtonGroup bg = new ButtonGroup();
@@ -55,7 +55,7 @@ public class Fond extends JFrame  implements ActionListener{
 	
 	private JPanel panel_reglage;
 	private static int vit_index;
-	private Affichage affichage;
+	
 	private Parametrage f_parametrage;
 
 	public Fond(route route,Affichage affiche){
