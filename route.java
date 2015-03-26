@@ -69,6 +69,7 @@ public class route {
 	public void step() {
 		int vmax_local=vmax;
 		boolean sortie;
+		if(temps<nb_itteration){
 		temps++;
 		for(i=0;i<nb_voiture;i++){
 			vmax_local=this.regulation(i);
@@ -84,6 +85,9 @@ public class route {
 		matrice_densite();
 		//sortieDensiteTexte();
 		//sortieVoitureTexte();
+		}else{
+			System.out.println("Nombre d'interration max atteind");
+		}
 	}
 
 	private int regulation(int position) {
