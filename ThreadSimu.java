@@ -18,7 +18,7 @@ public class ThreadSimu extends Thread {
 	public void run() {
 		Fond fenetre_reglage = new Fond("Entrez vos donnez ci-dessous",lancement);
 		try{ lancement.acquire();
-
+//atente du parametrage
 		}
 		catch(InterruptedException e){
 		}
