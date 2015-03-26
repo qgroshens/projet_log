@@ -22,7 +22,7 @@ public class Affichage extends JFrame {
 	public Affichage(){
 		
 		this.trace = new Trace();
-		trace.setPreferredSize(new Dimension(640, 480)); //
+		trace.setPreferredSize(new Dimension(600, 600)); //
 		trace.setLayout(null);//
 		this.setTitle("Affichage densite");
 		this.setSize(600, 600);

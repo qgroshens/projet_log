@@ -30,6 +30,7 @@ public class route {
 	private double[][]matrice_densite;
 	private int itteration;
 	private double seuil;
+	private boolean stop;
 
 	route(int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2,double p3,double seuil){
 		this.vmax=vmax;
@@ -42,6 +43,7 @@ public class route {
 		voiture_devant=null;
 		model= new nagel(longueur,p,p2,p3);
 		position=new int[nb_voiture];
+		stop=false;
 	}
 
 	public	void creation(){
@@ -86,8 +88,12 @@ public class route {
 		//sortieDensiteTexte();
 		//sortieVoitureTexte();
 		}else{
-			System.out.println("Nombre d'interration max atteind");
+			System.out.println("Nombre d'interration max atteint");
+			stop=true;
 		}
+	}
+	public boolean get_stop(){
+		return stop;
 	}
 
 	private int regulation(int position) {
