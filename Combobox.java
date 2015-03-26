@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class Combobox extends JComboBox implements ActionListener{
 	static final long serialVersionUID = 1;
-	
+
 	private Fond fen_reglage;
 	//private JPanel panel_box;
 	private int vit=0;
@@ -27,10 +27,10 @@ public class Combobox extends JComboBox implements ActionListener{
 		this.addItem("vitesse rapide");	
 	}
 
-	
+
 	public void actionPerformed(ActionEvent e){
 		String choix = (String)this.getSelectedItem();
-		
+
 		if (choix == "vitesse lente"){
 			this.vit = 1;
 		}
@@ -42,7 +42,7 @@ public class Combobox extends JComboBox implements ActionListener{
 		}
 
 		fen_reglage.set_vitesse(vit);
-		
+
 	}
 
 }

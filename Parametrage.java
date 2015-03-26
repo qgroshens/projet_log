@@ -1,7 +1,7 @@
 package projet_log;
 
 public class Parametrage {
-	
+
 	private int nombre_voiture;
 	private int taille_route;
 	private int vitesse_max;
@@ -28,8 +28,8 @@ public class Parametrage {
 		seuil_regulation = seuil;
 		regulation = reg;
 	}
-	
-	
+
+
 	public int get_nbvoiture(){
 		return nombre_voiture;
 	}
@@ -57,7 +57,7 @@ public class Parametrage {
 	public int get_nbstep(){
 		return nb_increment;
 	}
-	
+
 }
 
 

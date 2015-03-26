@@ -17,8 +17,8 @@ import javax.swing.JRadioButton;
 public class Fond extends JFrame  implements ActionListener{
 	static final long serialVersionUID = 1;	
 
-	
-	
+	private static int vit_index;
+
 	//variables utilisées dans l'interface graphique
 	private route route;
 	private Boutons1 b_startstop;
@@ -30,14 +30,13 @@ public class Fond extends JFrame  implements ActionListener{
 	private JLabel label_num_voit[];
 	private Affichage affichage;
 	private Thread t;
-	
+
 	//variable utilisées dans la fenetre de régalge
-	
+
 	private Boutons1 b_ok;
 	private boolean modeDensite;
 	private Semaphore sema;
 
-	
 	//les champs 
 	private JRadioButton seuil_on;
 	private JRadioButton seuil_off;
@@ -51,11 +50,10 @@ public class Fond extends JFrame  implements ActionListener{
 	private ChampText champ_proba3;
 	private ChampText champ_seuil;
 	private ChampText champ_nb_increment;
+
 	private boolean reg; //est-ce qu'on met une régulation des bouchons en place y/n
-	
+
 	private JPanel panel_reglage;
-	private static int vit_index;
-	
 	private Parametrage f_parametrage;
 
 	public Fond(route route,Affichage affiche){
@@ -70,7 +68,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.route=route;
 		this.liste = route.get_route();
 		this.affichage=affiche;
-		
+
 
 		//les boutons
 		b_increment = new Boutons1("incrément", this);
@@ -103,11 +101,11 @@ public class Fond extends JFrame  implements ActionListener{
 		this.setVisible(true);
 	}
 
-	
+
 	public Fond(String nom_box, Semaphore sema){
 		f_parametrage = new Parametrage();
 		this.sema = sema;
-		
+
 		//les boites de dialogue
 		this.boite_combo = new Combobox(this);
 		this.champ_voit = new ChampText(this,"Nombre de voiture");
@@ -118,7 +116,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.champ_proba3 = new ChampText(this,"Probabilité de freiner brutalement");
 		this.champ_seuil = new ChampText(this,"seuil densité de régulation");
 		this.champ_nb_increment = new ChampText(this, "nombre d'incréments");
-		
+
 		//les radiobuttons
 		this.seuil_on = new JRadioButton("activer les seuils");
 		this.seuil_off = new JRadioButton("desactiver les seuils");
@@ -126,19 +124,19 @@ public class Fond extends JFrame  implements ActionListener{
 		seuil_off.addActionListener(this);
 		bg.add(seuil_off);
 		bg.add(seuil_on);
-		
+
 
 		//du code utile mais chiant
 		this.setTitle(nom_box);
 		this.setSize(450, 400);
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(5 ,5);
-		
+
 		b_ok = new Boutons1("ok", this);
 		this.panel_reglage = new JPanel();
 		panel_reglage.setBackground(Color.white);
 		panel_reglage.setLayout(new GridLayout(5,2,3,3));
-		
+
 		panel_reglage.add(boite_combo);
 		panel_reglage.add(seuil_on);
 		panel_reglage.add(seuil_off);
@@ -150,7 +148,7 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(champ_proba2);
 		panel_reglage.add(champ_proba3);
 		panel_reglage.add(champ_seuil);
-		
+
 		//celui ci à la fin
 		panel_reglage.add(b_ok);
 		this.setContentPane(panel_reglage);
@@ -186,7 +184,7 @@ public class Fond extends JFrame  implements ActionListener{
 		else if(bouton_appuye == "ok"){
 
 			System.out.println("");
-				if (seuil_on.isSelected()){
+			if (seuil_on.isSelected()){
 				reg = true;
 			}
 			else{
@@ -198,32 +196,32 @@ public class Fond extends JFrame  implements ActionListener{
 		}
 
 		else{
-			
+
 		}
 	}
 
-	
+
 	public Parametrage get_Parametrage(){
 		return f_parametrage;
 	}
-	
+
 	public void set_vitesse(int vit_index){
 		this.vit_index=vit_index;
 	}
 
 
-	
-//======================================================================================================================================//
-//=====================================================================================================================================//
-//====================================================================================================================================//
-	
+
+	//======================================================================================================================================//
+	//=====================================================================================================================================//
+	//====================================================================================================================================//
+
 
 	public class Panneau extends JPanel implements Runnable{
 		static final long serialVersionUID = 1;	
 		private boolean b_run;
 		private int hauteur_dess_route;
 		private int vit_anim;
-		
+
 
 
 		public Panneau(){
@@ -277,7 +275,7 @@ public class Fond extends JFrame  implements ActionListener{
 			//System.out.println("on est bien lï¿½!");
 			set_vitesse_animation(vit_index);
 			while(b_run){
-				
+
 				route.step();
 				affichage.setMatrice(route.get_matrice_densite());
 				affichage.refresh();
