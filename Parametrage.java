@@ -5,6 +5,7 @@ public class Parametrage {
 	private int nombre_voiture;
 	private int taille_route;
 	private int vitesse_max;
+	private int nb_increment;
 	private double proba_ralentir;
 	private double proba_demarrage;
 	private double proba_lapin;
@@ -16,10 +17,11 @@ public class Parametrage {
 
 	}
 
-	public void set_parametres (int nb_voit, int taille, int vit, double pral, double pdemar, double plapin, double seuil, boolean reg){
+	public void set_parametres (int nb_voit, int taille, int vit, int nbincre, double pral, double pdemar, double plapin, double seuil, boolean reg){
 		nombre_voiture = nb_voit;
 		taille_route = taille;
 		vitesse_max = vit;
+		nb_increment = nbincre;
 		proba_ralentir = pral;
 		proba_demarrage = pdemar;
 		proba_lapin = plapin;
@@ -51,6 +53,9 @@ public class Parametrage {
 	}
 	public boolean get_regulation(){
 		return regulation;
+	}
+	public int get_nbstep(){
+		return nb_increment;
 	}
 	
 }
