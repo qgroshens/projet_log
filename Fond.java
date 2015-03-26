@@ -18,8 +18,8 @@ public class Fond extends JFrame  implements ActionListener{
 	static final long serialVersionUID = 1;	
 
 
-
 	//variables utilis�es dans l'interface graphique
+
 	private route route;
 	private Boutons1 b_startstop;
 	private Boutons1 b_increment;
@@ -31,12 +31,11 @@ public class Fond extends JFrame  implements ActionListener{
 	private Affichage affichage;
 	private Thread t;
 
-	//variable utilis�es dans la fenetre de r�galge
 
+	//variable utilis�es dans la fenetre de r�galge
 	private Boutons1 b_ok;
 	private boolean modeDensite;
 	private Semaphore sema;
-
 
 	//les champs 
 	private JRadioButton seuil_on;
@@ -112,12 +111,14 @@ public class Fond extends JFrame  implements ActionListener{
 		this.boite_combo = new Combobox(this);
 		this.champ_voit = new ChampText(this,"Nombre de voiture");
 		this.champ_route = new ChampText(this,"Taille de la route");
+
 		this.champ_vmax = new ChampText(this,"Vitesse max (case/unit� de temps)");
 		this.champ_proba1 = new ChampText(this, "Probabilit� de ralentir pour rien");
 		this.champ_proba2 = new ChampText(this,"Probabilit� de ne pas red�marrer");
 		this.champ_proba3 = new ChampText(this,"Probabilit� de freiner brutalement");
 		this.champ_seuil = new ChampText(this,"seuil densit� de r�gulation");
 		this.champ_nb_increment = new ChampText(this, "nombre d'incr�ments");
+
 
 		//les radiobuttons
 		this.seuil_on = new JRadioButton("activer les seuils");
@@ -150,6 +151,7 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.add(champ_proba2);
 		panel_reglage.add(champ_proba3);
 		panel_reglage.add(champ_seuil);
+
 
 		//celui ci � la fin
 		panel_reglage.add(b_ok);
@@ -277,6 +279,7 @@ public class Fond extends JFrame  implements ActionListener{
 			//System.out.println("on est bien l�!");
 			set_vitesse_animation(vit_index);
 			while(b_run){
+
 				while(!route.get_stop()){
 					route.step();
 					affichage.setMatrice(route.get_matrice_densite());
@@ -292,6 +295,7 @@ public class Fond extends JFrame  implements ActionListener{
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+
 				}
 			}
 		}
