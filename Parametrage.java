@@ -2,15 +2,15 @@ package projet_log;
 
 public class Parametrage {
 
-	private int nombre_voiture;
-	private int taille_route;
-	private int vitesse_max;
-	private int nb_increment;
-	private double proba_ralentir;
-	private double proba_demarrage;
-	private double proba_lapin;
-	private double seuil_regulation;
-	private boolean regulation;
+	private int nombre_voiture = 10;
+	private int taille_route = 50;
+	private int vitesse_max = 5;
+	private int nb_increment = 100;
+	private double proba_ralentir = 0.;
+	private double proba_demarrage= 0.;
+	private double proba_lapin= 0.;
+	private double seuil_regulation= 1;
+	private boolean regulation = false;
 
 
 	public Parametrage(){

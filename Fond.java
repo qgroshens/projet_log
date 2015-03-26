@@ -112,12 +112,12 @@ public class Fond extends JFrame  implements ActionListener{
 		this.champ_voit = new ChampText(this,"Nombre de voiture");
 		this.champ_route = new ChampText(this,"Taille de la route");
 
-		this.champ_vmax = new ChampText(this,"Vitesse max (case/unitï¿½ de temps)");
-		this.champ_proba1 = new ChampText(this, "Probabilitï¿½ de ralentir pour rien");
-		this.champ_proba2 = new ChampText(this,"Probabilitï¿½ de ne pas redï¿½marrer");
-		this.champ_proba3 = new ChampText(this,"Probabilitï¿½ de freiner brutalement");
-		this.champ_seuil = new ChampText(this,"seuil densitï¿½ de rï¿½gulation");
-		this.champ_nb_increment = new ChampText(this, "nombre d'incrï¿½ments");
+		this.champ_vmax = new ChampText(this,"Vitesse max");
+		this.champ_proba1 = new ChampText(this, "Proba de ralentir pour rien");
+		this.champ_proba2 = new ChampText(this,"Proba de ne pas redémarrer");
+		this.champ_proba3 = new ChampText(this,"Proba de freiner brutalement");
+		this.champ_seuil = new ChampText(this,"seuil de régulation");
+		this.champ_nb_increment = new ChampText(this, "nombre d'incréments");
 
 
 		//les radiobuttons
@@ -131,7 +131,7 @@ public class Fond extends JFrame  implements ActionListener{
 
 		//du code utile mais chiant
 		this.setTitle(nom_box);
-		this.setSize(450, 400);
+		this.setSize(550, 400);
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(5 ,5);
 
@@ -164,7 +164,7 @@ public class Fond extends JFrame  implements ActionListener{
 	public void actionPerformed(ActionEvent evenement) {
 		String bouton_appuye = evenement.getActionCommand();
 
-		if(bouton_appuye == "incrï¿½ment"){
+		if(bouton_appuye == "incrément"){
 			route.step();
 			fond.repaint();
 		}
@@ -186,14 +186,21 @@ public class Fond extends JFrame  implements ActionListener{
 			}
 		}
 		else if(bouton_appuye == "ok"){
-
-			System.out.println("");
+			
+			//gestion de la régulation oui/non
 			if (seuil_on.isSelected()){
 				reg = true;
 			}
 			else{
 				reg = false;
 			}
+			
+			/*champ_voit.get
+			System.out.println(""+champ_voit.getText().getClass());
+			//vérification du contenue des cases 
+			//if(o.getClass().equals(Integer.class))*/
+			
+			
 
 			f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.parseDouble(champ_proba1.getText()),  Double.parseDouble(champ_proba2.getText()),  Double.parseDouble(champ_proba3.getText()),  Double.parseDouble(champ_seuil.getText()), reg);
 			sema.release();
@@ -280,7 +287,7 @@ public class Fond extends JFrame  implements ActionListener{
 			set_vitesse_animation(vit_index);
 			while(b_run){
 
-				while(!route.get_stop()){
+				if(!route.get_stop()){
 					route.step();
 					affichage.setMatrice(route.get_matrice_densite());
 					affichage.refresh();
@@ -295,8 +302,8 @@ public class Fond extends JFrame  implements ActionListener{
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-
 				}
+				
 			}
 		}
 		public void set_vitesse_animation(int vit){
