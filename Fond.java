@@ -27,6 +27,7 @@ public class Fond extends JFrame  implements ActionListener{
 	private JLabel compteur_step = new JLabel(); 
 	private JLabel label_num_voit[];
 	private boolean modeDensite;
+	private boolean go_main = false;
 	
 	private JRadioButton seuil_on;
 	private JRadioButton seuil_off;
@@ -120,7 +121,7 @@ public class Fond extends JFrame  implements ActionListener{
 		//du code utile mais chiant
 		this.setTitle(nom_box);
 		this.setSize(450, 400);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(5 ,5);
 		
 		b_ok = new Boutons1("ok", this);
@@ -196,14 +197,16 @@ public class Fond extends JFrame  implements ActionListener{
 
 			
 			f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()),  Double.parseDouble(champ_proba1.getText()),  Double.parseDouble(champ_proba2.getText()),  Double.parseDouble(champ_proba3.getText()),  Double.parseDouble(champ_seuil.getText()), reg);
-			//simulation.set_attente(false);
+			this.go_main = true;
 		}
 
 		else{
 			
 		}
 	}
-	
+	public boolean get_gomain(){
+		return go_main;
+	}
 	
 	public void set_vitesse(int vit_index){
 		this.vit_index=vit_index;

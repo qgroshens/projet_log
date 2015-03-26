@@ -3,12 +3,13 @@ package projet_log;
 
 public class simulation implements Runnable {
 
-	private boolean attente = false;
+	//private static boolean attente = true;
 
 	public static void main (String[] args){
 		Fond fenetre_reglage = new Fond("Entrez vos donnez ci-dessous");
 		Thread temps = new Thread();
 		temps.start();
+		//attente = !fenetre_reglage.get_gomain();
 		route route=new route(6,60,20,100,0.2,0.00,0.0000,0.8);//int vmax, int longueur,int nb_voiture, int nb_itt, double p,double p2
 		route.creation();
 		route.init_matrice_densite(60, 300);
@@ -18,15 +19,19 @@ public class simulation implements Runnable {
 
 	}
 
-	public void set_attente(boolean b){
+	/*public void set_attente(boolean b){
 		attente = b;
 	}
 
 	public void run() {
-		while(attente){
+	while(attente){
 			
 		}
-	}
+	}*/
+	
+	
+	
+	
 	
 
 	/*for(int i=0;i<200;i++){
