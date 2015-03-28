@@ -53,11 +53,22 @@ public class Fond extends JFrame  implements ActionListener{
 	private ChampText champ_nb_increment;
 	private boolean reg = false; //est-ce qu'on met une régulation des bouchons en place y/n
 
+	//les labels
+	private JLabel L_increment;
+	private JLabel L_vitesse;
+	private JLabel L_voit;
+	private JLabel L_route;
+	private JLabel L_proba1;
+	private JLabel L_proba2;
+	private JLabel L_proba3;
+	private JLabel L_seuil;
+	private JLabel L_vit_anim;
+
 	private JPanel panel_reglage;
 	private Parametrage f_parametrage;
 
 
-
+	//constructeur de la fentre d'affichage
 	public Fond(route route,Affichage affiche){
 		this.setVisible(true);
 		this.fond = new Panneau();
@@ -103,21 +114,21 @@ public class Fond extends JFrame  implements ActionListener{
 	}
 
 
+	//constructeur de la fenetre de réglage
 	public Fond(String nom_box, Semaphore sema){
 		f_parametrage = new Parametrage();
 		this.sema = sema;
 
 		//les boites de dialogue
 		this.boite_combo = new Combobox(this);
-		this.champ_voit = new ChampText(this,"Nombre de voiture");
-		this.champ_route = new ChampText(this,"Taille de la route");
-
-		this.champ_vmax = new ChampText(this,"Vitesse max");
-		this.champ_proba1 = new ChampText(this, "Proba de ralentir pour rien");
-		this.champ_proba2 = new ChampText(this,"Proba de ne pas redémarrer");
-		this.champ_proba3 = new ChampText(this,"Proba de freiner brutalement");
-		this.champ_seuil = new ChampText(this,"Seuil de régulation [0;1]");
-		this.champ_nb_increment = new ChampText(this, "nombre d'incréments");
+		this.champ_voit = new ChampText(this,"");
+		this.champ_route = new ChampText(this,"");
+		this.champ_vmax = new ChampText(this,"");
+		this.champ_proba1 = new ChampText(this, "entre 0 et 1");
+		this.champ_proba2 = new ChampText(this,"entre 0 et 1");
+		this.champ_proba3 = new ChampText(this,"entre 0 et 1");
+		this.champ_seuil = new ChampText(this,"entre 0 et 1");
+		this.champ_nb_increment = new ChampText(this, "");
 
 		//les radiobuttons
 		this.seuil_on = new JRadioButton("activer les seuils");
@@ -128,33 +139,55 @@ public class Fond extends JFrame  implements ActionListener{
 		bg.add(seuil_off);
 		bg.add(seuil_on);
 
+		//les labels de la f_regalge
+		this.L_route = new JLabel("taille de la route");
+		this.L_increment = new JLabel("nombre d'incrément voulu");
+		this.L_seuil = new JLabel("valeur du seuil plancher");
+		this.L_voit = new JLabel("nombre de voiture");
+		this.L_vitesse = new JLabel("vitesse maximale des voitures");
+		this.L_proba1 = new JLabel("probabilité de freiner sans raison");
+		this.L_proba2 = new JLabel("probabilité de ne pas redémarer immédiatement");
+		this.L_proba3 = new JLabel("probabilité de freiner brusquement");
+		this.L_vit_anim = new JLabel("vitesse de l'animation");
 
-		//du code utile mais chiant
+
 		this.setTitle(nom_box);
-		this.setSize(550, 400);
+		//this.setSize(250, 200);
 		this.setLocation(5 ,5);
 
 		b_ok = new Boutons1("ok", this);
 		this.panel_reglage = new JPanel();
 		panel_reglage.setBackground(Color.white);
-		panel_reglage.setLayout(new GridLayout(5,2,3,3));
+		panel_reglage.setLayout(new GridLayout(12,2));
 
+		//on ajoute les label et les champs dans l'ordre.
+		panel_reglage.add(L_vit_anim);
 		panel_reglage.add(boite_combo);
 		panel_reglage.add(seuil_on);
 		panel_reglage.add(seuil_off);
+		panel_reglage.add(L_increment);
 		panel_reglage.add(champ_nb_increment);
+		panel_reglage.add(L_voit);
 		panel_reglage.add(champ_voit);
+		panel_reglage.add(L_route);
 		panel_reglage.add(champ_route);
+		panel_reglage.add(L_vitesse);
 		panel_reglage.add(champ_vmax);
+		panel_reglage.add(L_proba1);
 		panel_reglage.add(champ_proba1);
+		panel_reglage.add(L_proba2);
 		panel_reglage.add(champ_proba2);
+		panel_reglage.add(L_proba3);
 		panel_reglage.add(champ_proba3);
+		panel_reglage.add(L_seuil);
 		panel_reglage.add(champ_seuil);
 
 
-		//celui ci à la fin
+		//ceci à la fin
 		panel_reglage.add(b_ok);
 		this.setContentPane(panel_reglage);
+		this.pack();
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -193,25 +226,27 @@ public class Fond extends JFrame  implements ActionListener{
 				reg = false;
 			}
 
-			//vérification du contenue des cases 
+			//vérification du format contenue dans les cases 
 			try{
 				Integer.valueOf(champ_voit.getText());
 				Integer.valueOf(champ_route.getText());
 				Integer.valueOf(champ_vmax.getText());
 				Integer.valueOf(champ_nb_increment.getText());
-				Double.parseDouble(champ_proba1.getText());
-				Double.parseDouble(champ_proba2.getText());
-				Double.parseDouble(champ_proba3.getText());
-				Double.parseDouble(champ_seuil.getText());
-				
-				f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.parseDouble(champ_proba1.getText()),  Double.parseDouble(champ_proba2.getText()),  Double.parseDouble(champ_proba3.getText()),  Double.parseDouble(champ_seuil.getText()), reg);
+				//E.valueOf(arg0)
+				Double.valueOf(champ_proba1.getText());
+				Double.valueOf(champ_proba2.getText());
+				Double.valueOf(champ_proba3.getText());
+				Double.valueOf(champ_seuil.getText());
+
+				//enregistrement des parametres rentrés par l'utilisateur dans le tableau de la clase parametrage
+				f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.valueOf(champ_proba1.getText()),  Double.valueOf(champ_proba2.getText()),  Double.valueOf(champ_proba3.getText()),  Double.valueOf(champ_seuil.getText()), reg);
 				sema.release();
-				
+
 			} catch (NumberFormatException e) {
 				System.out.println("les paramètres entrés n'ont pas le bon format");
 			}
-			
-			
+
+
 		}
 
 		else{
@@ -235,6 +270,7 @@ public class Fond extends JFrame  implements ActionListener{
 	//====================================================================================================================================//
 
 
+	//classe interne qui étent JPanel (le "background" de la JFrame
 	public class Panneau extends JPanel implements Runnable{
 		static final long serialVersionUID = 1;	
 		private boolean b_run;
