@@ -146,7 +146,7 @@ public class Fond extends JFrame  implements ActionListener{
 		this.L_voit = new JLabel("nombre de voiture");
 		this.L_vitesse = new JLabel("vitesse maximale des voitures");
 		this.L_proba1 = new JLabel("probabilité de freiner sans raison");
-		this.L_proba2 = new JLabel("probabilité de ne pas redémarer immédiatement");
+		this.L_proba2 = new JLabel("probabilité de ne pas redémarrer immédiatement");
 		this.L_proba3 = new JLabel("probabilité de freiner brusquement");
 		this.L_vit_anim = new JLabel("vitesse de l'animation");
 
