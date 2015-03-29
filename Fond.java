@@ -121,14 +121,14 @@ public class Fond extends JFrame  implements ActionListener{
 
 		//les boites de dialogue
 		this.boite_combo = new Combobox(this);
-		this.champ_voit = new ChampText(this,"");
-		this.champ_route = new ChampText(this,"");
-		this.champ_vmax = new ChampText(this,"");
-		this.champ_proba1 = new ChampText(this, "entre 0 et 1");
-		this.champ_proba2 = new ChampText(this,"entre 0 et 1");
-		this.champ_proba3 = new ChampText(this,"entre 0 et 1");
-		this.champ_seuil = new ChampText(this,"entre 0 et 1");
-		this.champ_nb_increment = new ChampText(this, "");
+		this.champ_nb_increment = new ChampText(this, "200");
+		this.champ_voit = new ChampText(this,"20");
+		this.champ_route = new ChampText(this,"50");
+		this.champ_vmax = new ChampText(this,"5");
+		this.champ_proba1 = new ChampText(this, "0.1");
+		this.champ_proba2 = new ChampText(this,"0.25");
+		this.champ_proba3 = new ChampText(this,"0.08");
+		this.champ_seuil = new ChampText(this,"0.8");
 
 		//les radiobuttons
 		this.seuil_on = new JRadioButton("activer les seuils");

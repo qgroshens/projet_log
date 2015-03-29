@@ -1,30 +1,41 @@
 package projet_log;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 
-
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Affichage extends JFrame {
 	static final long serialVersionUID = 1;
-	
+
 	private Trace trace;
 	private double[][] matrice;
 	private int tMax;
 	private int longMax;
+	private JLabel nom_axe;
 
 
 	public Affichage(){
 
 		this.trace = new Trace();
-		trace.setPreferredSize(new Dimension(600, 600)); //
+		//trace.setPreferredSize(new Dimension(600, 600)); //
+		trace.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()));
 		trace.setLayout(null);//
-		this.setTitle("Affichage densite");
+
+
+		this.nom_axe = new JLabel();
+		Font police = new Font("Tahoma", Font.ITALIC, 14); 
+		nom_axe.setFont(police);
+		nom_axe.setForeground(Color.BLACK);
+		nom_axe.setBounds(5, 5,500,100);
+		nom_axe.setText("<html>axe x : coordonées sur la route<br>axe y : temps en nombre d'incrément</html>");
+		trace.add(nom_axe);
+
+
+		this.setTitle("Affichage densité");
 		this.setSize(600, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(this.getWidth(),5);
