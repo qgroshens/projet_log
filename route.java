@@ -85,8 +85,10 @@ public class route {
 				}
 			}
 			matrice_densite();
-			//sortieDensiteTexte();
-			//sortieVoitureTexte();
+			ecrireDensiteText();
+			ecrireVoitureText();
+			sortieDensiteTexte();
+			sortieVoitureTexte();
 		}else{
 			System.out.println("Nombre d'interration max atteint");
 			stop=true;
@@ -301,7 +303,7 @@ public class route {
 
 
 	public void ecrireDensiteText(){
-		final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\densiteVal.m";
+		final String chemin = "C:\\Users\\Edouard Z\\Desktop\\projet_logiciel\\densiteVal.m";
 		final File fichier =new File(chemin); 
 		try {
 			// Creation du fichier
@@ -321,7 +323,7 @@ public class route {
 		}
 	}
 	public void ecrireVoitureText(){
-		final String chemin = "C:\\Users\\Quentin\\Documents\\MATLAB\\projet_log\\voitureVal.m";
+		final String chemin = "C:\\Users\\Edouard Z\\Desktop\\projet_logiciel\\Voitures.m";
 		final File fichier =new File(chemin); 
 		try {
 			// Creation du fichier
@@ -337,7 +339,7 @@ public class route {
 				writer.close();
 			}
 		} catch (Exception e) {
-			System.out.println("Impossible de creer le fichier");
+			System.out.println("Impossible de créer le fichier");
 		}
 	}
 	private int[] range(int[] tableau){

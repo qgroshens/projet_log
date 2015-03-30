@@ -19,6 +19,7 @@ public class Fond extends JFrame  implements ActionListener{
 
 
 	private static int vit_index;
+	private static int nb_tot_incr;
 
 	//variables utilisées dans l'interface graphique
 	private route route;
@@ -241,6 +242,8 @@ public class Fond extends JFrame  implements ActionListener{
 
 				//enregistrement des parametres rentrés par l'utilisateur dans le tableau de la clase parametrage
 				f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.valueOf(champ_proba1.getText()),  Double.valueOf(champ_proba2.getText()),  Double.valueOf(champ_proba3.getText()),  Double.valueOf(champ_seuil.getText()), reg);
+				
+				this.nb_tot_incr = Integer.valueOf(champ_nb_increment.getText());
 				sema.release();
 
 			} catch (NumberFormatException e) {
@@ -318,7 +321,7 @@ public class Fond extends JFrame  implements ActionListener{
 					g.fillRect(taille_case*k+marge+4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 
 
-					compteur_step.setText("incrément n° " + route.get_temps());
+					compteur_step.setText("incrément n° " + route.get_temps() + " / " + nb_tot_incr); //affichage du nombre d'incrément
 					label_num_voit[liste[k]-1].setBounds(taille_case*k+marge+taille_case/2-4, this.getHeight()/2-hauteur_dess_route/2+15, taille_case-5, hauteur_dess_route-2*15);
 				}
 			}
