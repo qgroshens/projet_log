@@ -198,6 +198,7 @@ public class Fond extends JFrame  implements ActionListener{
 		if(bouton_appuye == "incrément"){
 			route.step();
 			fond.repaint();
+			affichage.refresh();
 		}
 		else if (bouton_appuye == "start/stop"){
 
@@ -270,7 +271,7 @@ public class Fond extends JFrame  implements ActionListener{
 	//====================================================================================================================================//
 
 
-	//classe interne qui étent JPanel (le "background" de la JFrame
+	//classe interne qui étent JPanel (le "background" de la JFrame)
 	public class Panneau extends JPanel implements Runnable{
 		static final long serialVersionUID = 1;	
 		private boolean b_run;
@@ -294,7 +295,7 @@ public class Fond extends JFrame  implements ActionListener{
 
 			super.paintComponents(g);
 
-			int marge = 5; //les marges à gauche et ï¿½ droite de la route
+			int marge = 5; //les marges à gauche et à droite de la route
 			int taille_case = Math.round((this.getWidth()-2*marge)/nb_case); // taille des cases à dessiner
 
 			g.setColor(Color.blue); //fond de la fenêtre d'interface
