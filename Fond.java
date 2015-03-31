@@ -230,8 +230,11 @@ public class Fond extends JFrame  implements ActionListener{
 
 			//vérification du format contenue dans les cases 
 			try{
+				
 				Integer.valueOf(champ_voit.getText());
+				int alpha = Integer.valueOf(champ_voit.getText());
 				Integer.valueOf(champ_route.getText());
+				int beta = Integer.valueOf(champ_route.getText());
 				Integer.valueOf(champ_vmax.getText());
 				Integer.valueOf(champ_nb_increment.getText());
 				//E.valueOf(arg0)
@@ -239,12 +242,23 @@ public class Fond extends JFrame  implements ActionListener{
 				Double.valueOf(champ_proba2.getText());
 				Double.valueOf(champ_proba3.getText());
 				Double.valueOf(champ_seuil.getText());
-
-				//enregistrement des parametres rentrés par l'utilisateur dans le tableau de la clase parametrage
-				f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.valueOf(champ_proba1.getText()),  Double.valueOf(champ_proba2.getText()),  Double.valueOf(champ_proba3.getText()),  Double.valueOf(champ_seuil.getText()), reg);
 				
-				this.nb_tot_incr = Integer.valueOf(champ_nb_increment.getText());
-				sema.release();
+				Integer.valueOf(champ_voit.getText());
+				Integer.valueOf(champ_route.getText());
+				
+				if(alpha<=beta){
+					//enregistrement des parametres rentrés par l'utilisateur dans le tableau de la clase parametrage
+					f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.valueOf(champ_proba1.getText()),  Double.valueOf(champ_proba2.getText()),  Double.valueOf(champ_proba3.getText()),  Double.valueOf(champ_seuil.getText()), reg);
+					
+					this.nb_tot_incr = Integer.valueOf(champ_nb_increment.getText());
+					//ouverture de la fenêtre d'affichage
+					sema.release();
+				}
+				else{
+				System.out.println("il y a plus de voitures que de cellules sur la route");	
+				}
+				
+				
 
 			} catch (NumberFormatException e) {
 				System.out.println("les paramètres entrés n'ont pas le bon format");
