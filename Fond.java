@@ -351,11 +351,6 @@ public class Fond extends JFrame  implements ActionListener{
 					affichage.setMatrice(route.get_matrice_densite());
 					affichage.refresh();
 					repaint();
-					if(modeDensite){
-						//route.ecrireDensiteText();
-						//route.ecrireVoitureText();
-					}
-
 					try {
 						Thread.sleep(vit_anim);
 					} catch (InterruptedException e) {
