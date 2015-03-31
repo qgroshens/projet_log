@@ -21,7 +21,8 @@ public class ChampText extends JTextField implements MouseListener {
 		this.addMouseListener(this);
 
 	}
-
+	
+	//efface le contenue de la case lorsque l'on clique dedans
 	public void mouseClicked(MouseEvent arg0) {
 		this.setSelectionStart(0);
 		this.setSelectionEnd(this.getText().length());
