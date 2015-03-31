@@ -46,14 +46,17 @@ public class route {
 		stop=false;
 	}
 
+
 	public	void creation(){
 		gen_position(nb_voiture,longueur);
 		do{
+			//crée toutes les voitures, et des numéros, ainsi que de la "voiture de devant"
 			num=num+1;
 			liste_voit[i]=new voiture(position[nb_voiture-i-1], voiture_devant,num,route,vmax);
 			voiture_devant=liste_voit[i];
 			i++;
 		}while(i<nb_voiture);
+		//on finit par "relier" la première voiture à la derniere de la route (qui est celle de devant pour elle)
 		liste_voit[0].set_devant(liste_voit[nb_voiture-1]);
 		i=0;
 		//affichage(longueur,route);

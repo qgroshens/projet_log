@@ -11,6 +11,7 @@ import java.util.concurrent.Semaphore;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -31,7 +32,7 @@ public class Fond extends JFrame  implements ActionListener{
 	private JLabel label_num_voit[];
 	private Affichage affichage;
 	private Thread t;
-
+	private JOptionPane jop1, jop2;
 
 	//variable utilisées dans la fenetre de réglage
 	private Boutons1 b_ok;
@@ -152,7 +153,6 @@ public class Fond extends JFrame  implements ActionListener{
 
 
 		this.setTitle(nom_box);
-		//this.setSize(250, 200);
 		this.setLocation(5 ,5);
 
 		b_ok = new Boutons1("ok", this);
@@ -160,7 +160,7 @@ public class Fond extends JFrame  implements ActionListener{
 		panel_reglage.setBackground(Color.white);
 		panel_reglage.setLayout(new GridLayout(12,2));
 
-		//on ajoute les label et les champs dans l'ordre.
+		//on ajoute les labels et les champs dans l'ordre.
 		panel_reglage.add(L_vit_anim);
 		panel_reglage.add(boite_combo);
 		panel_reglage.add(seuil_on);
@@ -204,8 +204,8 @@ public class Fond extends JFrame  implements ActionListener{
 
 			if(compteur == false){
 				b_increment.setEnabled(false);
-				fond.set_bool_anim(true);
-				this.t = new Thread(fond);
+				//fond.set_bool_anim(true);
+				this.t = new Thread(fond); //thread créer pour lancer l'animation sans bloquer le programme
 				fond.set_bool_anim(true);
 				t.start();
 				compteur = true;
@@ -227,7 +227,7 @@ public class Fond extends JFrame  implements ActionListener{
 				reg = false;
 			}
 
-			//vérification du format contenue dans les cases 
+			//vérification du format contenu dans les champs texte 
 			try{
 
 				Integer.valueOf(champ_voit.getText());
@@ -245,22 +245,27 @@ public class Fond extends JFrame  implements ActionListener{
 				Integer.valueOf(champ_voit.getText());
 				Integer.valueOf(champ_route.getText());
 
+				//if pour vérifier si le nombre de voiture entré n'est pas supérieur à la taille de la route
 				if(alpha<=beta){
 					//enregistrement des parametres rentrés par l'utilisateur dans le tableau de la clase parametrage
 					f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.valueOf(champ_proba1.getText()),  Double.valueOf(champ_proba2.getText()),  Double.valueOf(champ_proba3.getText()),  Double.valueOf(champ_seuil.getText()), reg);
 
 					this.nb_tot_incr = Integer.valueOf(champ_nb_increment.getText());
-					//ouverture de la fenêtre d'affichage
+					
+					//permet l'ouverture de la fenêtre d'affichage
 					sema.release();
 				}
 				else{
-					System.out.println("il y a plus de voitures que de cellules sur la route");	
+					jop2 = new JOptionPane();
+					jop2.showMessageDialog(null, "il y a plus de voitures que de cellules sur la route", "Attention", JOptionPane.WARNING_MESSAGE);
+					System.out.println("Il y a plus de voitures que de cellules sur la route");	
 				}
-
 
 
 			} catch (NumberFormatException e) {
 				System.out.println("les paramètres entrés n'ont pas le bon format");
+				jop1 = new JOptionPane();
+				jop1.showMessageDialog(null, "Les paramètres entrés n'ont pas le bon format", "Attention", JOptionPane.WARNING_MESSAGE);
 			}
 
 
@@ -360,6 +365,8 @@ public class Fond extends JFrame  implements ActionListener{
 
 			}
 		}
+		
+		//permet de récupérer la vitessse demandée dans la f_reglage
 		public void set_vitesse_animation(int vit){
 			if(vit==1){
 				vit_anim=250;

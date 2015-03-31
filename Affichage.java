@@ -21,16 +21,17 @@ public class Affichage extends JFrame {
 	public Affichage(){
 
 		this.trace = new Trace();
-		//trace.setPreferredSize(new Dimension(600, 600)); //
 		trace.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()));
 		trace.setLayout(null);//
 
 
+		//affiche le nom des axes
 		this.nom_axe = new JLabel();
 		Font police = new Font("Tahoma", Font.ITALIC, 14); 
 		nom_axe.setFont(police);
 		nom_axe.setForeground(Color.BLACK);
 		nom_axe.setBounds(5, 5,500,100);
+		 //interpréteur html pour passage à la ligne facile dans un seul JLabel
 		nom_axe.setText("<html>axe x : coordonées sur la route<br>axe y : temps en nombre d'incrément</html>");
 		trace.add(nom_axe);
 
@@ -51,6 +52,8 @@ public class Affichage extends JFrame {
 		tMax=matrice[0].length;
 		trace.init_dim();
 	}
+	
+	//met à jour l'affichage de la densité
 	public void refresh(){
 		trace.repaint();
 	}
@@ -73,6 +76,7 @@ public class Affichage extends JFrame {
 		}
 
 
+		//colorie la fenetre d'affichage de la densité avec des couleurs fonction de la densité calculée
 		public void paintComponent(Graphics g){
 			int R;
 			int G;

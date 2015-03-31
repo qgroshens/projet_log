@@ -16,6 +16,7 @@ public class Parametrage {
 
 	}
 
+	//permet de stocker tous les parametres issus de la fenetre de reglage
 	public void set_parametres (int nb_voit, int taille, int vit, int nbincre, double pral, double pdemar, double plapin, double seuil, boolean reg){
 		nombre_voiture = nb_voit;
 		taille_route = taille;
@@ -28,7 +29,7 @@ public class Parametrage {
 		regulation = reg;
 	}
 
-
+	//va permetre à la route de récupérer tous ces paramètres
 	public int get_nbvoiture(){
 		return nombre_voiture;
 	}

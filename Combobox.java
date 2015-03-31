@@ -38,7 +38,7 @@ public class Combobox extends JComboBox implements ActionListener{
 		else{
 			this.vit = 3;	
 		}
-
+		//renvoie à la fenetre de réglage le résultat du choix (de l(utilisateur)
 		fen_reglage.set_vitesse(vit);
 
 	}
