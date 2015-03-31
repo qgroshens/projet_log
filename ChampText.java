@@ -16,7 +16,6 @@ public class ChampText extends JTextField implements MouseListener {
 	public ChampText(Fond f_reglage, String text_init ){
 
 		this.fen_reglage = f_reglage;
-		//this.setPreferredSize(new Dimension(100,20));
 		this.text_init = text_init;
 		this.setText(text_init);
 		this.addMouseListener(this);
@@ -32,25 +31,21 @@ public class ChampText extends JTextField implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	

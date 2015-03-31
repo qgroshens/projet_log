@@ -8,10 +8,8 @@ public class ThreadSimu extends Thread {
 	private Semaphore lancement;
 
 	public ThreadSimu() {
-		// TODO Auto-generated constructor stub
 		lancement=new Semaphore(0);
 	}
-
 
 	public void run() {
 		Fond fenetre_reglage = new Fond("Entrez vos donnez ci-dessous",lancement);

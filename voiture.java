@@ -17,7 +17,6 @@ public class voiture {
 
 	void set_vitesse(int vit){
 		vitesse=vit;
-		//System.out.println("voiture n�"+num+" vitesse "+vit);
 	}
 	int get_vitesse(){
 		return vitesse;
@@ -38,11 +37,9 @@ public class voiture {
 		route[position]=0;
 		position=pos;
 		route[position]=num;
-		//System.out.println("voiture n°"+num+" position "+pos);
 	}
 	int get_num(){
 		return num;
 	}
-
 
 }

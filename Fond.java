@@ -17,7 +17,6 @@ import javax.swing.JRadioButton;
 public class Fond extends JFrame  implements ActionListener{
 	static final long serialVersionUID = 1;	
 
-
 	private static int vit_index;
 	private static int nb_tot_incr;
 
@@ -230,7 +229,7 @@ public class Fond extends JFrame  implements ActionListener{
 
 			//vérification du format contenue dans les cases 
 			try{
-				
+
 				Integer.valueOf(champ_voit.getText());
 				int alpha = Integer.valueOf(champ_voit.getText());
 				Integer.valueOf(champ_route.getText());
@@ -242,23 +241,23 @@ public class Fond extends JFrame  implements ActionListener{
 				Double.valueOf(champ_proba2.getText());
 				Double.valueOf(champ_proba3.getText());
 				Double.valueOf(champ_seuil.getText());
-				
+
 				Integer.valueOf(champ_voit.getText());
 				Integer.valueOf(champ_route.getText());
-				
+
 				if(alpha<=beta){
 					//enregistrement des parametres rentrés par l'utilisateur dans le tableau de la clase parametrage
 					f_parametrage.set_parametres(Integer.valueOf(champ_voit.getText()), Integer.valueOf(champ_route.getText()), Integer.valueOf(champ_vmax.getText()), Integer.valueOf(champ_nb_increment.getText()), Double.valueOf(champ_proba1.getText()),  Double.valueOf(champ_proba2.getText()),  Double.valueOf(champ_proba3.getText()),  Double.valueOf(champ_seuil.getText()), reg);
-					
+
 					this.nb_tot_incr = Integer.valueOf(champ_nb_increment.getText());
 					//ouverture de la fenêtre d'affichage
 					sema.release();
 				}
 				else{
-				System.out.println("il y a plus de voitures que de cellules sur la route");	
+					System.out.println("il y a plus de voitures que de cellules sur la route");	
 				}
-				
-				
+
+
 
 			} catch (NumberFormatException e) {
 				System.out.println("les paramètres entrés n'ont pas le bon format");
@@ -280,7 +279,6 @@ public class Fond extends JFrame  implements ActionListener{
 	public void set_vitesse(int vit_index){
 		this.vit_index=vit_index;
 	}
-
 
 
 	//======================================================================================================================================//

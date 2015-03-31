@@ -12,7 +12,6 @@ public class Combobox extends JComboBox implements ActionListener{
 	static final long serialVersionUID = 1;
 
 	private Fond fen_reglage;
-	//private JPanel panel_box;
 	private int vit=0;
 
 	public Combobox(Fond f_reglage){

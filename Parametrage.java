@@ -12,7 +12,6 @@ public class Parametrage {
 	private double seuil_regulation= 1;
 	private boolean regulation = false;
 
-
 	public Parametrage(){
 
 	}

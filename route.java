@@ -130,7 +130,6 @@ public class route {
 		boolean sortie;
 
 		do{
-			//System.out.println("tour restant "+temps);
 			for(i=0;i<nb_voiture;i++){
 				model.maj_vitesse(liste_voit[i], vmax);
 
@@ -190,24 +189,6 @@ public class route {
 	}
 
 	private void gen_position(int nb_voiture, int longueur){
-		/*
-		List<Integer> positions = new ArrayList<Integer>();
-		for(int i = 0 ; i < longueur ; ++i)
-			positions.add(i);
-		// randomize the positions
-		Collections.shuffle(positions);
-
-		// keep only the nb_voiture first
-		List<Integer> positions_to_keep = new ArrayList<Integer>();
-		for(Integer i : positions) {
-			positions_to_keep.add(i);
-			if(positions_to_keep.size() == nb_voiture)
-				 break;
-		}
-		// sort by decreasing order
-		Collections.sort(positions_to_keep);
-		Collections.reverse(positions_to_keep);
-		 */
 
 		boolean[] occupation=new boolean[longueur];
 		position[0]=(int)(Math.floor(Math.random()*(longueur)));//position premiere voiture
@@ -252,8 +233,6 @@ public class route {
 	public double[][] get_matrice_densite(){
 		return matrice_densite;
 	}
-
-
 
 
 
@@ -344,16 +323,7 @@ public class route {
 	}
 	private int[] range(int[] tableau){
 		Arrays.sort(tableau);
-		Collections.reverse(Arrays.asList(tableau));//ArrayUtils.reverse(tableau);
-		/*
-		for(int i=0;i<tableau.length;i++){
-			tableau[i]=-tableau[i];
-		}
-		Arrays.sort(tableau);
-		for(int i=0;i<tableau.length;i++){
-			tableau[i]=-tableau[i];
-		}
-		 */
+		Collections.reverse(Arrays.asList(tableau));
 		return tableau;
 	}
 
