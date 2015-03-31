@@ -7,9 +7,9 @@ public class ThreadSimu extends Thread {
 
 	private Semaphore lancement;
 
-	public ThreadSimu(Semaphore sema) {
+	public ThreadSimu() {
 		// TODO Auto-generated constructor stub
-		lancement=sema;
+		lancement=new Semaphore(0);
 	}
 
 
@@ -27,7 +27,7 @@ public class ThreadSimu extends Thread {
 		route.creation();
 		route.init_matrice_densite(param.get_taille_route(), param.get_nbstep());
 		Affichage affichage=new Affichage();
-		Fond fenetre = new Fond(route,affichage);
+		new Fond(route,affichage);
 	}
 
 }
